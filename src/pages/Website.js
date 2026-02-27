@@ -13,7 +13,7 @@ function ServiceIconImg(name) {
 function WebsitePage() {
   var services = [
     { title: 'Custom Website Development', icon: ServiceIconImg('chrome'), desc: ['We build bespoke websites tailored to your unique business needs. From corporate sites to creative portfolios, our custom development approach ensures your website stands out and performs exceptionally.', 'Every website we create is responsive, fast-loading, and optimized for search engines.'] },
-    { title: 'Ecommerce Website Development', icon: ServiceIconImg('shopify'), desc: ['Launch or upgrade your online store with our ecommerce development services. We create secure, user-friendly shopping experiences that convert visitors into customers.', 'From product catalogs to payment integration and inventory management, we build complete ecommerce solutions.'] },
+    { title: 'Ecommerce Website Development', icon: ServiceIconImg('woocommerce'), desc: ['Launch or upgrade your online store with our ecommerce development services. We create secure, user-friendly shopping experiences that convert visitors into customers.', 'From product catalogs to payment integration and inventory management, we build complete ecommerce solutions.'] },
     { title: 'Landing Page & Web App Development', icon: ServiceIconImg('html5'), desc: ['High-converting landing pages and lightweight web applications that drive results. We focus on clear messaging, strong CTAs, and fast load times.', 'Our landing pages are designed for specific campaigns and goals.'] }
   ];
   var processSteps = [
