@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "title": "AssisMe",
+    "description": "AssisMe is a Job Board Application to connect Employer with Employee the need was to create an application where candidates looking for a job can record a \"Video Resume\" To show case their talent and employer who is hiring can also create a \"Video job post\".",
+    "tags": ["Job Board Application", "Design", "Figma", "Adobe Photoshop"],
+    "logoUrl": "/images/portfolio/assisme-logo.png",
+    "screens": [
+      "/images/portfolio/assisme-screen1.png",
+      "/images/portfolio/assisme-screen2.png",
+      "/images/portfolio/assisme-screen3.png"
+    ],
+    "linkUrl": "#"
+  },
+  {
+    "id": "1",
+    "title": "Hotlyme",
+    "description": "Hotlyme is a Social Media Application to connect with your friends and family and share your thoughts and ideas with them.",
+    "tags": ["Job Board Application", "Design", "Figma", "Adobe Photoshop"],
+    "logoUrl": "/images/portfolio/assisme-logo.png",
+    "screens": [
+      "/images/portfolio/assisme-screen1.png",
+      "/images/portfolio/assisme-screen2.png",
+      "/images/portfolio/assisme-screen3.png"
+    ],
+    "linkUrl": "#"
+  }
+
+]

@@ -138,20 +138,27 @@ function ServicePage(props) {
       )
     ),
     React.createElement('footer', { className: 'service-footer' },
+      React.createElement('div', { className: 'service-footer-cta' },
+        React.createElement('p', { className: 'service-footer-cta-text' }, 'Ready to build something great?'),
+        React.createElement(Link, { to: '/#contact', className: 'service-footer-cta-btn' },
+          'Get in Touch',
+          React.createElement('span', { className: 'service-footer-cta-arrow' }, '\u2192')
+        )
+      ),
       React.createElement('div', { className: 'service-footer-inner' },
-        React.createElement('div', { className: 'service-footer-col' },
+        React.createElement('div', { className: 'service-footer-col service-footer-col-accent-cyan' },
           React.createElement('h4', null, 'Services'),
           footerServices.map(function(link, i) {
             return React.createElement(Link, { key: i, to: link.to || '#' }, link.label);
           })
         ),
-        React.createElement('div', { className: 'service-footer-col' },
+        React.createElement('div', { className: 'service-footer-col service-footer-col-accent-gold' },
           React.createElement('h4', null, 'Links'),
           footerLinks.map(function(link, i) {
             return React.createElement(Link, { key: i, to: link.to || '#' }, link.label);
           })
         ),
-        React.createElement('div', { className: 'service-footer-col' },
+        React.createElement('div', { className: 'service-footer-col service-footer-col-accent-pink' },
           React.createElement('h4', null, 'Contact'),
           React.createElement('a', { href: 'mailto:contact@profitsols.com', className: 'service-footer-contact' },
             React.createElement(IconMail, null),

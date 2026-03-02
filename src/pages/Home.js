@@ -6,6 +6,7 @@ var useEffect = React.useEffect;
 var Link = require('react-router-dom').Link;
 var useLocation = require('react-router-dom').useLocation;
 var SharedHeader = require('../components/SharedHeader');
+var portfolioData = require('../data/portfolio.json');
 require('./Home.css');
 
 function Home() {
@@ -225,13 +226,16 @@ function ServicesSection() {
     React.createElement('div', { className: 'services-grid' },
       services.map(function(service, i) {
         var iconSrc = SERVICE_CDN + '/' + service.iconName + '/' + service.iconName + '-original.svg';
-        return React.createElement('div', { key: i, className: 'service-card' },
+        var accents = ['cyan', 'gold', 'pink', 'primary'];
+        var accent = accents[i % accents.length];
+        return React.createElement(Link, { key: i, to: service.to, className: 'service-card service-card-accent-' + accent },
+          React.createElement('div', { className: 'service-card-accent-bar' }),
           React.createElement('div', { className: 'service-icon' },
             React.createElement('img', { src: iconSrc, alt: '', className: 'service-icon-img', width: 56, height: 56 })
           ),
           React.createElement('h3', { className: 'service-title' }, service.title),
           React.createElement('p', { className: 'service-desc' }, service.desc),
-          React.createElement(Link, { to: service.to, className: 'service-link' },
+          React.createElement('span', { className: 'service-link' },
             'Read More',
             React.createElement(IconArrowRight, null)
           )
@@ -242,108 +246,103 @@ function ServicesSection() {
 }
 
 function CaseStudiesSection() {
+  var items = portfolioData || [];
+  var activeIndex = 0;
+  var _useState = useState(0);
+  activeIndex = _useState[0];
+  var setActiveIndex = _useState[1];
+
+  var goPrev = function() {
+    setActiveIndex(function(i) { return i <= 0 ? items.length - 1 : i - 1; });
+  };
+  var goNext = function() {
+    setActiveIndex(function(i) { return i >= items.length - 1 ? 0 : i + 1; });
+  };
+
+  if (items.length === 0) {
+    return React.createElement('section', { className: 'case-studies', id: 'portfolio' },
+      React.createElement(SectionLabel, null, 'Portfolio'),
+      React.createElement('h2', { className: 'section-title' }, 'See our case studies'),
+      React.createElement('p', { style: { textAlign: 'center', padding: '40px 24px' } }, 'No portfolio items yet. Add data to src/data/portfolio.json.'),
+      React.createElement('div', { className: 'case-studies-cta' },
+        React.createElement('a', { href: '#portfolio', className: 'btn-portfolio' },
+          'View Our Portfolio',
+          React.createElement(IconArrowRight, null)
+        )
+      )
+    );
+  }
+
+  var item = items[activeIndex];
+  var logoUrl = item.logoUrl || '';
+  var screens = item.screens || [];
+  var screen1 = screens[0] || '';
+  var screen2 = screens[1] || logoUrl;
+  var screen3 = screens[2] || '';
+
   return React.createElement('section', { className: 'case-studies', id: 'portfolio' },
     React.createElement(SectionLabel, null, 'Portfolio'),
     React.createElement('h2', { className: 'section-title' }, 'See our case studies'),
     React.createElement('div', { className: 'case-study-wrapper' },
-      React.createElement('button', { className: 'case-study-nav case-study-prev', 'aria-label': 'Previous' }, '\u2039'),
+      React.createElement('button', { className: 'case-study-nav case-study-prev', 'aria-label': 'Previous', onClick: goPrev },
+        React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', width: 24, height: 24 },
+          React.createElement('polyline', { points: '15 18 9 12 15 6' })
+        )
+      ),
       React.createElement('div', { className: 'case-study-card' },
         React.createElement('div', { className: 'case-study-content' },
-          React.createElement(AssisMeLogo, null),
-          React.createElement('div', { className: 'case-study-tags' },
-            React.createElement('span', { className: 'case-study-tag tag-cyan' }, 'Job Board Application'),
-            React.createElement('span', { className: 'case-study-tag tag-dark' }, 'Design'),
-            React.createElement('span', { className: 'case-study-tag tag-dark' }, 'Figma'),
-            React.createElement('span', { className: 'case-study-tag tag-cyan' }, 'Adobe Photoshop')
+          React.createElement('div', { className: 'case-study-header' },
+            logoUrl ? React.createElement('div', { className: 'case-study-logo-wrap' },
+              React.createElement('img', { src: logoUrl, alt: item.title, className: 'case-study-logo-img' })
+            ) : null,
+            React.createElement('div', { className: 'case-study-tags' },
+              (item.tags || []).map(function(tag, i) {
+                return React.createElement('span', { key: i, className: 'case-study-tag' }, tag);
+              })
+            )
           ),
-          React.createElement('h3', { className: 'case-study-title' }, 'AssisMe'),
-          React.createElement('p', { className: 'case-study-desc' },
-            'AssisMe is a Job Board Application to connect Employer with Employee the need was to create an application where candidates looking for a job can record a "Video Resume" To show case their talent and employer who is hiring can also create a "Video job post".'
-          ),
-          React.createElement('a', { href: '#', className: 'case-study-link' }, 'View project')
+          React.createElement('h3', { className: 'case-study-title' }, item.title),
+          React.createElement('p', { className: 'case-study-desc' }, item.description),
+          React.createElement('a', { href: item.linkUrl || '#', target: '_blank', rel: 'noopener noreferrer', className: 'case-study-link' },
+            'View project',
+            React.createElement(IconArrowRight, null)
+          )
         ),
         React.createElement('div', { className: 'case-study-phones' },
-          React.createElement('div', { className: 'case-study-shape' }),
+          React.createElement('div', { className: 'case-study-phones-bg' }),
           React.createElement('div', { className: 'phone-mockup phone-back phone-left' },
             React.createElement('div', { className: 'phone-screen' },
-              React.createElement('div', { className: 'phone-profile' },
-                React.createElement('div', { className: 'phone-avatar' }),
-                React.createElement('p', { className: 'phone-role' }, 'Software Engineer'),
-                React.createElement('p', { className: 'phone-location' }, '153 Redmango'),
-                React.createElement('p', { className: 'phone-address' }, '23F Streat # 3, CA'),
-                React.createElement('div', { className: 'phone-nav' },
-                  React.createElement('span', { className: 'phone-nav-icon' }, '\u2302'),
-                  React.createElement('span', { className: 'phone-nav-icon' }, '\u2315'),
-                  React.createElement('span', { className: 'phone-nav-icon active' }, '+'),
-                  React.createElement('span', { className: 'phone-nav-icon' }, '\u2606'),
-                  React.createElement('span', { className: 'phone-nav-icon' }, '\u263A')
-                )
-              )
+              screen1 ? React.createElement('img', { src: screen1, alt: item.title + ' screen 1', className: 'phone-screen-img' }) : null
             )
           ),
           React.createElement('div', { className: 'phone-mockup phone-center' },
             React.createElement('div', { className: 'phone-screen phone-splash' },
-              React.createElement(AssisMeLogo, { small: true }),
-              React.createElement('p', { className: 'phone-tap' }, 'tap to continue')
+              screen2 ? React.createElement('img', { src: screen2, alt: item.title + ' screen 2', className: 'phone-screen-img phone-splash-img' }) : null
             )
           ),
           React.createElement('div', { className: 'phone-mockup phone-back phone-right' },
             React.createElement('div', { className: 'phone-screen' },
-              React.createElement('div', { className: 'phone-applicants' },
-                React.createElement('div', { className: 'phone-toggle' },
-                  React.createElement('span', { className: 'phone-toggle-option' }, 'Show Jobs'),
-                  React.createElement('span', { className: 'phone-toggle-option active' }, 'Show Applicants')
-                ),
-                React.createElement('div', { className: 'phone-card' },
-                  React.createElement('div', { className: 'phone-card-avatars' },
-                    React.createElement('span', { className: 'phone-card-avatar' }),
-                    React.createElement('span', { className: 'phone-card-avatar' }),
-                    React.createElement('span', { className: 'phone-card-avatar play' }, '\u25B6')
-                  ),
-                  React.createElement('p', { className: 'phone-card-title' }, 'Software Engineer')
-                ),
-                React.createElement('div', { className: 'phone-card' },
-                  React.createElement('div', { className: 'phone-card-avatars' },
-                    React.createElement('span', { className: 'phone-card-avatar' }),
-                    React.createElement('span', { className: 'phone-card-avatar' })
-                  ),
-                  React.createElement('p', { className: 'phone-card-title' }, 'Software Engineer')
-                )
-              )
+              screen3 ? React.createElement('img', { src: screen3, alt: item.title + ' screen 3', className: 'phone-screen-img' }) : null
             )
           )
         )
       ),
-      React.createElement('button', { className: 'case-study-nav case-study-next', 'aria-label': 'Next' }, '\u203A')
+      React.createElement('button', { className: 'case-study-nav case-study-next', 'aria-label': 'Next', onClick: goNext },
+        React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', width: 24, height: 24 },
+          React.createElement('polyline', { points: '9 18 15 12 9 6' })
+        )
+      )
     ),
+    items.length > 1 ? React.createElement('div', { className: 'case-study-dots' },
+      items.map(function(_, i) {
+        return React.createElement('button', { key: i, className: 'case-study-dot' + (i === activeIndex ? ' active' : ''), 'aria-label': 'Go to slide ' + (i + 1), onClick: function() { setActiveIndex(i); } });
+      })
+    ) : null,
     React.createElement('div', { className: 'case-studies-cta' },
       React.createElement('a', { href: '#portfolio', className: 'btn-portfolio' },
         'View Our Portfolio',
         React.createElement(IconArrowRight, null)
       )
-    )
-  );
-}
-
-function AssisMeLogo(props) {
-  var small = props && props.small;
-  var size = small ? 32 : 52;
-  return React.createElement('div', { className: 'assisme-logo' + (small ? ' assisme-logo-small' : '') },
-    React.createElement('svg', {
-      viewBox: '0 0 70 70',
-      className: 'assisme-logo-svg',
-      'aria-hidden': 'true'
-    },
-      React.createElement('text', {
-        x: '35',
-        y: small ? '44' : '48',
-        textAnchor: 'middle',
-        fontSize: size,
-        fontWeight: '800',
-        fontFamily: 'Georgia, serif',
-        fill: '#E8A317',
-        letterSpacing: '-2px'
-      }, 'AM')
     )
   );
 }
@@ -416,19 +415,26 @@ function NewsSection() {
 
 function Footer() {
   return React.createElement('footer', { className: 'footer', id: 'contact' },
+    React.createElement('div', { className: 'footer-cta' },
+      React.createElement('p', { className: 'footer-cta-text' }, 'Ready to build something great?'),
+      React.createElement(Link, { to: '/#contact', className: 'footer-cta-btn' },
+        'Get in Touch',
+        React.createElement('span', { className: 'footer-cta-arrow' }, '\u2192')
+      )
+    ),
     React.createElement('div', { className: 'footer-top' },
-      React.createElement('div', { className: 'footer-col' },
+      React.createElement('div', { className: 'footer-col footer-col-accent-cyan' },
         React.createElement('h4', null, 'About'),
         React.createElement('p', null, 'We Provide quality service with proven results')
       ),
-      React.createElement('div', { className: 'footer-col' },
+      React.createElement('div', { className: 'footer-col footer-col-accent-gold' },
         React.createElement('h4', null, 'Services'),
         React.createElement(Link, { to: '/mobile-app-development' }, 'Mobile App Development'),
         React.createElement(Link, { to: '/website-development' }, 'Website Development'),
         React.createElement(Link, { to: '/web-app-development' }, 'Web App Development'),
         React.createElement(Link, { to: '/ui-ux-development' }, 'UI/UX Design')
       ),
-      React.createElement('div', { className: 'footer-col' },
+      React.createElement('div', { className: 'footer-col footer-col-accent-pink' },
         React.createElement('h4', null, 'Links'),
         React.createElement('a', { href: '#company' }, 'About Us'),
         React.createElement('a', { href: '#contact' }, 'Contact Us'),
@@ -436,7 +442,7 @@ function Footer() {
         React.createElement('a', { href: '#news' }, 'Latest News'),
         React.createElement('a', { href: '#' }, 'Terms & Conditions')
       ),
-      React.createElement('div', { className: 'footer-col' },
+      React.createElement('div', { className: 'footer-col footer-col-accent-primary' },
         React.createElement('h4', null, 'Contact'),
         React.createElement('a', { href: 'mailto:contact@profitsols.com', className: 'footer-contact' },
           React.createElement(IconMail, null),
