@@ -226,18 +226,19 @@ function ServicesSection() {
     React.createElement('div', { className: 'services-grid' },
       services.map(function(service, i) {
         var iconSrc = SERVICE_CDN + '/' + service.iconName + '/' + service.iconName + '-original.svg';
-        var accents = ['cyan', 'gold', 'pink', 'primary'];
-        var accent = accents[i % accents.length];
-        return React.createElement(Link, { key: i, to: service.to, className: 'service-card service-card-accent-' + accent },
-          React.createElement('div', { className: 'service-card-accent-bar' }),
-          React.createElement('div', { className: 'service-icon' },
-            React.createElement('img', { src: iconSrc, alt: '', className: 'service-icon-img', width: 56, height: 56 })
-          ),
+        return React.createElement(Link, { key: i, to: service.to, className: 'service-card' },
           React.createElement('h3', { className: 'service-title' }, service.title),
           React.createElement('p', { className: 'service-desc' }, service.desc),
-          React.createElement('span', { className: 'service-link' },
-            'Read More',
-            React.createElement(IconArrowRight, null)
+          React.createElement('div', { className: 'service-card-footer' },
+            React.createElement('div', { className: 'service-read-more' },
+              React.createElement('span', { className: 'service-read-more-btn' },
+                React.createElement(IconArrowRight, null)
+              ),
+              React.createElement('span', { className: 'service-read-more-text' }, 'Read More')
+            ),
+            React.createElement('div', { className: 'service-icon' },
+              React.createElement('img', { src: iconSrc, alt: '', className: 'service-icon-img', width: 80, height: 80 })
+            )
           )
         );
       })

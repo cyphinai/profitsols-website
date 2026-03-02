@@ -535,7 +535,7 @@ a {
 
 /* Services Section */
 .services {
-  background: linear-gradient(180deg, var(--color-gray-light) 0%, var(--color-white) 100%);
+  background: var(--color-white);
   padding: 120px 24px 120px;
   position: relative;
 }
@@ -576,10 +576,11 @@ a {
   max-width: var(--container-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
 }
 
+/* Service cards */
 .service-card {
   display: flex;
   flex-direction: column;
@@ -588,197 +589,139 @@ a {
   background: var(--color-white);
   border-radius: var(--radius-xl);
   padding: 40px 36px 36px;
-  box-shadow: 0 8px 32px rgba(0, 64, 127, 0.08), 0 2px 12px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 64, 127, 0.06);
+  border: 1px solid rgba(0, 64, 127, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 64, 127, 0.06);
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
 }
 
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 24px 56px rgba(0, 64, 127, 0.14), 0 12px 32px rgba(0, 0, 0, 0.08);
-  border-color: transparent;
-}
-
-/* Accent bar - visible by default, color per card */
-.service-card-accent-bar {
+.service-card::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  transition: height var(--transition), opacity var(--transition);
-}
-
-.service-card-accent-cyan .service-card-accent-bar {
-  background: linear-gradient(90deg, var(--color-cyan), #00d4ff);
-}
-
-.service-card-accent-gold .service-card-accent-bar {
-  background: linear-gradient(90deg, var(--color-gold), #e8c04a);
-}
-
-.service-card-accent-pink .service-card-accent-bar {
-  background: linear-gradient(90deg, var(--color-pink), #ff4d7a);
-}
-
-.service-card-accent-primary .service-card-accent-bar {
+  height: 3px;
   background: linear-gradient(90deg, var(--color-primary), var(--color-cyan));
+  opacity: 0;
+  transition: opacity var(--transition);
 }
 
-.service-card:hover .service-card-accent-bar {
-  height: 6px;
+.service-card:hover {
+  border-color: var(--color-cyan);
+  box-shadow: 0 12px 40px rgba(0, 203, 240, 0.15);
+  transform: translateY(-4px);
+}
+
+.service-card:hover::before {
   opacity: 1;
-}
-
-/* Icon - accent-colored background per card */
-.service-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-  transition: all var(--transition);
-}
-
-.service-card-accent-cyan .service-icon {
-  background: linear-gradient(135deg, rgba(0, 203, 240, 0.18), rgba(0, 203, 240, 0.08));
-}
-
-.service-card-accent-gold .service-icon {
-  background: linear-gradient(135deg, rgba(212, 173, 57, 0.2), rgba(212, 173, 57, 0.08));
-}
-
-.service-card-accent-pink .service-icon {
-  background: linear-gradient(135deg, rgba(238, 44, 101, 0.15), rgba(238, 44, 101, 0.06));
-}
-
-.service-card-accent-primary .service-icon {
-  background: linear-gradient(135deg, rgba(0, 64, 127, 0.12), rgba(0, 203, 240, 0.08));
-}
-
-.service-card:hover .service-icon {
-  transform: scale(1.05);
-}
-
-.service-card-accent-cyan:hover .service-icon {
-  background: linear-gradient(135deg, var(--color-cyan), #00d4ff);
-}
-
-.service-card-accent-gold:hover .service-icon {
-  background: linear-gradient(135deg, var(--color-gold), #e8c04a);
-}
-
-.service-card-accent-pink:hover .service-icon {
-  background: linear-gradient(135deg, var(--color-pink), #ff4d7a);
-}
-
-.service-card-accent-primary:hover .service-icon {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-cyan));
-}
-
-.service-card:hover .service-icon .service-icon-img {
-  filter: brightness(0) invert(1);
-}
-
-.service-icon .service-icon-img {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  transition: filter var(--transition);
 }
 
 .service-title {
   font-size: 22px;
-  color: var(--color-dark);
-  margin-bottom: 14px;
   font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 18px;
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   line-height: 1.25;
 }
 
 .service-desc {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--color-gray);
-  margin-bottom: 24px;
-  line-height: 1.7;
+  margin-bottom: 32px;
+  line-height: 1.75;
   text-align: justify;
   text-justify: inter-word;
   flex: 1;
 }
 
-/* Read More - button style with accent color */
-.service-link {
-  font-size: 15px;
-  font-weight: 600;
-  display: inline-flex;
+.service-card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: auto;
+}
+
+.service-read-more {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  width: fit-content;
-  padding: 12px 24px;
-  border-radius: var(--radius-full);
+  gap: 14px;
+}
+
+.service-read-more-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gray-light) 0%, #e8eef4 100%);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(0, 64, 127, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 64, 127, 0.06);
   transition: all var(--transition);
 }
 
-.service-card-accent-cyan .service-link {
-  color: var(--color-cyan);
-  background: rgba(0, 203, 240, 0.1);
-  border: 2px solid rgba(0, 203, 240, 0.3);
-}
-
-.service-card-accent-gold .service-link {
-  color: var(--color-gold);
-  background: rgba(212, 173, 57, 0.12);
-  border: 2px solid rgba(212, 173, 57, 0.35);
-}
-
-.service-card-accent-pink .service-link {
-  color: var(--color-pink);
-  background: rgba(238, 44, 101, 0.1);
-  border: 2px solid rgba(238, 44, 101, 0.3);
-}
-
-.service-card-accent-primary .service-link {
-  color: var(--color-primary);
-  background: rgba(0, 64, 127, 0.08);
-  border: 2px solid rgba(0, 64, 127, 0.2);
-}
-
-.service-card:hover .service-link {
-  color: var(--color-white);
-  border-color: transparent;
-}
-
-.service-card-accent-cyan:hover .service-link {
-  background: var(--color-cyan);
-}
-
-.service-card-accent-gold:hover .service-link {
-  background: var(--color-gold);
-}
-
-.service-card-accent-pink:hover .service-link {
-  background: var(--color-pink);
-}
-
-.service-card-accent-primary:hover .service-link {
-  background: var(--color-primary);
-}
-
-.service-link .icon-svg {
-  width: 18px;
-  height: 18px;
+.service-read-more-btn .icon-svg {
+  width: 22px;
+  height: 22px;
   transition: transform var(--transition);
 }
 
-.service-card:hover .service-link .icon-svg {
+.service-read-more-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+  transition: color var(--transition);
+}
+
+.service-card:hover .service-read-more-btn {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: var(--color-white);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(0, 64, 127, 0.3);
+}
+
+.service-card:hover .service-read-more-btn .icon-svg {
   transform: translateX(4px);
-  color: inherit;
+}
+
+.service-card:hover .service-read-more-text {
+  color: var(--color-primary-light);
+}
+
+.service-icon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 203, 240, 0.1) 0%, rgba(0, 64, 127, 0.06) 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(0, 203, 240, 0.2);
+  transition: all var(--transition);
+}
+
+.service-card:hover .service-icon {
+  background: linear-gradient(135deg, rgba(0, 203, 240, 0.18) 0%, rgba(0, 64, 127, 0.1) 100%);
+  border-color: rgba(0, 203, 240, 0.35);
+}
+
+.service-icon-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  transition: all var(--transition);
+}
+
+.service-card:hover .service-icon-img {
+  transform: scale(1.08);
 }
 
 /* Case Studies */
@@ -1887,6 +1830,7 @@ a {
 
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .why-choose-grid {
