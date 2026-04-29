@@ -1,5 +1,7 @@
 'use strict';
 
+require('./styles/cyber-global.css');
+
 var React = require('react');
 var ReactDOM = require('react-dom/client');
 var App = require('./App');

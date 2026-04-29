@@ -1,0 +1,118 @@
+.cyber-footer {
+  position: relative;
+  margin-top: auto;
+  background: linear-gradient(180deg, #0a1628 0%, #0d1f35 45%, #0f2847 100%);
+  padding: 56px 24px 32px;
+  overflow: hidden;
+}
+
+.cyber-footer-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-gold), var(--cyber-pink), var(--cyber-cyan));
+  background-size: 300% 100%;
+  animation: cyber-gradient-shift 8s ease infinite;
+}
+
+.cyber-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cyber-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 900px) {
+  .cyber-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .cyber-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cyber-footer-logo-text {
+  font-family: var(--font-display, 'Sora', sans-serif);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 10px;
+  letter-spacing: -0.03em;
+}
+
+.cyber-footer-tag {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+  max-width: 280px;
+}
+
+.cyber-footer-col h4 {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyber-cyan);
+  margin: 0 0 18px;
+}
+
+.cyber-footer-col a {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: color var(--cyber-transition);
+}
+
+.cyber-footer-col a:hover {
+  color: var(--cyber-cyan);
+}
+
+.cyber-footer-contact {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(0, 203, 240, 0.1);
+  border: 1px solid rgba(0, 203, 240, 0.22);
+  margin-bottom: 10px !important;
+}
+
+.cyber-footer-contact:hover {
+  border-color: var(--cyber-cyan);
+  background: rgba(0, 203, 240, 0.16);
+}
+
+.cyber-footer-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--cyber-cyan);
+}
+
+.cyber-footer-bottom {
+  padding-top: 28px;
+  text-align: center;
+}
+
+.cyber-footer-bottom p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}

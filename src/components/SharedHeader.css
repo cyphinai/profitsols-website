@@ -21,6 +21,255 @@
   box-shadow: var(--shadow-md, 0 12px 40px rgba(0, 64, 127, 0.1));
 }
 
+/* Cyber header redesign (higher specificity than Home.css .header) */
+.header.header--cyber {
+  height: var(--header-height, 80px);
+  background: rgba(9, 16, 28, 0.68);
+  border-bottom: 1px solid rgba(0, 203, 240, 0.14);
+  box-shadow: 0 0 0 1px rgba(0, 64, 127, 0.08) inset, 0 18px 40px rgba(2, 8, 18, 0.35);
+}
+
+.header.header--cyber .header-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(700px 120px at 20% 0%, rgba(0, 203, 240, 0.12), transparent 60%),
+    radial-gradient(700px 120px at 80% 0%, rgba(238, 44, 101, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.header.header--cyber .header-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.header.header--cyber .header-accent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0,203,240,0) 0%, rgba(0,203,240,0.95) 25%, rgba(212,173,57,0.85) 55%, rgba(238,44,101,0.95) 80%, rgba(0,203,240,0) 100%);
+  filter: drop-shadow(0 0 10px rgba(0, 203, 240, 0.35));
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.header-inner.header-inner--cyber {
+  position: relative;
+  z-index: 2;
+  max-width: min(1220px, 100%);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3.5vw, 32px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(12px, 2vw, 24px);
+}
+
+/* Inner frame: soft top highlight + bottom fade (sits under content) */
+.header-inner.header-inner--cyber::before {
+  content: '';
+  position: absolute;
+  left: clamp(16px, 3.5vw, 28px);
+  right: clamp(16px, 3.5vw, 28px);
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.14) 35%,
+    rgba(0, 203, 240, 0.35) 50%,
+    rgba(255, 255, 255, 0.12) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.header-inner.header-inner--cyber::after {
+  content: '';
+  position: absolute;
+  left: clamp(16px, 3.5vw, 28px);
+  right: clamp(16px, 3.5vw, 28px);
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 203, 240, 0.12) 45%,
+    rgba(238, 44, 101, 0.1) 55%,
+    transparent
+  );
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.logo.logo--cyber {
+  position: relative;
+  z-index: 1;
+  gap: 12px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 6px 10px 6px 4px;
+  margin-left: -4px;
+  border-radius: 14px;
+  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.logo.logo--cyber:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 203, 240, 0.12);
+}
+
+.logo.logo--cyber.logo--cyber-active {
+  background: linear-gradient(135deg, rgba(0, 203, 240, 0.14), rgba(0, 64, 127, 0.12));
+  border-color: rgba(0, 203, 240, 0.35);
+  box-shadow:
+    0 0 28px rgba(0, 203, 240, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.logo-text.logo-text--cyber {
+  color: rgba(255, 255, 255, 0.94);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+/* Nav cluster: glass pill (desktop) */
+@media (min-width: 769px) {
+  .header.header--cyber .nav.nav--cyber {
+    position: relative;
+    z-index: 1;
+    padding: 5px 6px;
+    border-radius: 999px;
+    background: rgba(6, 12, 24, 0.55);
+    border: 1px solid rgba(0, 203, 240, 0.14);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    gap: 4px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+@media (max-width: 768px) {
+  .header.header--cyber .nav.nav--cyber {
+    gap: 0;
+  }
+}
+
+.nav-link.nav-link--cyber {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.nav-dropdown-trigger.nav-link--cyber {
+  padding: 9px 14px 9px 16px;
+}
+
+.nav-link.nav-link--cyber:hover {
+  color: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 203, 240, 0.12);
+}
+
+/* Active route */
+.nav-link.nav-link--cyber.nav-link--active {
+  color: rgba(255, 255, 255, 0.98);
+  font-weight: 750;
+  background: linear-gradient(145deg, rgba(0, 203, 240, 0.22), rgba(0, 203, 240, 0.06));
+  border-color: rgba(0, 203, 240, 0.45);
+  box-shadow:
+    0 0 24px rgba(0, 203, 240, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.nav-link.nav-link--cyber.nav-link--active:hover {
+  background: linear-gradient(145deg, rgba(0, 203, 240, 0.28), rgba(0, 203, 240, 0.1));
+  border-color: rgba(0, 203, 240, 0.55);
+}
+
+/* Remove underline animation (replaced by pill states) */
+.nav-link.nav-link--cyber::after {
+  display: none;
+}
+
+.nav-dropdown-item.nav-dropdown-item--cyber {
+  position: relative;
+  color: rgba(255, 255, 255, 0.78);
+  border-radius: 8px;
+  margin: 2px 8px;
+  border: 1px solid transparent;
+}
+
+.nav-dropdown-item.nav-dropdown-item--cyber:hover {
+  color: rgba(255, 255, 255, 0.96);
+  background: rgba(0, 203, 240, 0.1);
+  border-color: rgba(0, 203, 240, 0.12);
+}
+
+.header.header--cyber .nav-dropdown-item.nav-dropdown-item--cyber.nav-dropdown-item--active {
+  color: rgba(255, 255, 255, 0.98);
+  font-weight: 700;
+  background: linear-gradient(90deg, rgba(0, 203, 240, 0.2), rgba(0, 203, 240, 0.05));
+  border-color: rgba(0, 203, 240, 0.28);
+  box-shadow: inset 3px 0 0 rgba(0, 203, 240, 0.95);
+}
+
+.header-actions.header-actions--cyber {
+  position: relative;
+  z-index: 1;
+  gap: 12px;
+}
+
+.btn-quote.btn-quote--cyber {
+  background: linear-gradient(135deg, rgba(0, 203, 240, 0.95), rgba(0, 97, 193, 0.95));
+  box-shadow: 0 14px 34px rgba(0, 203, 240, 0.22), 0 0 0 1px rgba(0, 203, 240, 0.18) inset;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-quote.btn-quote--cyber:hover {
+  background: linear-gradient(135deg, rgba(238, 44, 101, 0.95), rgba(0, 203, 240, 0.95));
+  box-shadow: 0 18px 48px rgba(238, 44, 101, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+}
+
+.btn-quote.btn-quote--cyber.btn-quote--cyber-active {
+  background: linear-gradient(135deg, rgba(0, 203, 240, 1), rgba(212, 173, 57, 0.85));
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(0, 203, 240, 0.5),
+    0 16px 40px rgba(0, 203, 240, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.nav-toggle.nav-toggle--cyber .nav-toggle-bar {
+  background: rgba(255,255,255,0.9);
+}
+
 .header-inner {
   max-width: var(--container-max, 1200px);
   margin: 0 auto;
@@ -41,6 +290,85 @@
 
 .logo-icon {
   flex-shrink: 0;
+}
+
+/* Cyberpunk logo animation */
+.logo-icon--cyber {
+  overflow: visible;
+}
+
+.logo-icon--cyber .p-mark {
+  transform-origin: 32px 32px;
+  animation: ps-logo-breathe 2.8s ease-in-out infinite;
+}
+
+.logo-icon--cyber .p-outline {
+  animation: ps-logo-flicker 4.2s steps(1, end) infinite;
+}
+
+.logo-icon--cyber .scanline {
+  animation: ps-logo-scan 1.6s linear infinite;
+  mix-blend-mode: screen;
+}
+
+.logo-icon--cyber .circuit {
+  stroke-dasharray: 10 10;
+  animation: ps-logo-trace 1.9s linear infinite;
+  opacity: 0.95;
+}
+
+.logo-icon--cyber .circuit--b { animation-duration: 2.3s; animation-direction: reverse; opacity: 0.85; }
+.logo-icon--cyber .circuit--c { animation-duration: 2.1s; }
+.logo-icon--cyber .circuit--d { animation-duration: 2.6s; animation-direction: reverse; opacity: 0.8; }
+
+.logo-icon--cyber .node {
+  animation: ps-logo-node 1.8s ease-in-out infinite;
+}
+
+.logo-icon--cyber .node:nth-of-type(2) { animation-delay: -0.4s; }
+.logo-icon--cyber .node:nth-of-type(3) { animation-delay: -0.9s; }
+
+@keyframes ps-logo-breathe {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.03) rotate(-0.6deg); }
+}
+
+@keyframes ps-logo-scan {
+  0% { transform: translateY(-6px); opacity: 0; }
+  10% { opacity: 0.95; }
+  60% { opacity: 0.35; }
+  100% { transform: translateY(54px); opacity: 0; }
+}
+
+@keyframes ps-logo-trace {
+  0% { stroke-dashoffset: 0; filter: drop-shadow(0 0 2px rgba(0,203,240,0.35)); }
+  100% { stroke-dashoffset: 40; filter: drop-shadow(0 0 6px rgba(238,44,101,0.25)); }
+}
+
+@keyframes ps-logo-flicker {
+  0%, 100% { opacity: 0.85; }
+  2% { opacity: 0.3; }
+  4% { opacity: 0.95; }
+  8% { opacity: 0.6; }
+  12% { opacity: 1; }
+  40% { opacity: 0.75; }
+  42% { opacity: 0.25; }
+  44% { opacity: 0.95; }
+}
+
+@keyframes ps-logo-node {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.45); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-icon--cyber .p-mark,
+  .logo-icon--cyber .p-outline,
+  .logo-icon--cyber .scanline,
+  .logo-icon--cyber .circuit,
+  .logo-icon--cyber .node {
+    animation: none !important;
+  }
 }
 
 .logo-text {
@@ -161,6 +489,33 @@
   z-index: 1001;
 }
 
+/* Dropdown menu (cyber header variant) */
+.header.header--cyber .nav-dropdown-menu {
+  background: rgba(9, 16, 28, 0.92);
+  border: 1px solid rgba(0, 203, 240, 0.18);
+  box-shadow: 0 24px 70px rgba(2, 8, 18, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+.header.header--cyber .nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background:
+    radial-gradient(220px 120px at 30% 0%, rgba(0, 203, 240, 0.14), transparent 60%),
+    radial-gradient(220px 120px at 80% 0%, rgba(238, 44, 101, 0.12), transparent 62%);
+  pointer-events: none;
+}
+
+.header.header--cyber .nav-dropdown-item {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.header.header--cyber .nav-dropdown-item:hover {
+  color: rgba(255, 255, 255, 0.98);
+  background: rgba(0, 203, 240, 0.10);
+}
+
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown-menu.open {
   opacity: 1;
@@ -199,11 +554,11 @@
     top: 80px;
     left: 0;
     right: 0;
-    background: var(--color-white, #fff);
+    background: rgba(9, 16, 28, 0.92);
     flex-direction: column;
     align-items: stretch;
     padding: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 24px 60px rgba(2, 8, 18, 0.5);
     display: none;
     z-index: 999;
   }
@@ -235,7 +590,7 @@
     transform: none;
     box-shadow: none;
     border: none;
-    border-left: 2px solid var(--color-primary, #00407F);
+    border-left: 2px solid rgba(0, 203, 240, 0.7);
     margin: 8px 0 8px 16px;
     padding: 4px 0;
     min-width: auto;

@@ -33,14 +33,15 @@ function WebsitePage() {
   ];
   var footerLinks = [
     { label: 'Home', to: '/' },
-    { label: 'About Us', to: '/#company' },
-    { label: 'Contact Us', to: '/#contact' },
-    { label: 'Portfolio', to: '/#portfolio' },
+    { label: 'Company', to: '/company' },
+    { label: 'Contact', to: '/contact' },
+    { label: 'Portfolio', to: '/portfolio' },
     { label: 'Careers', to: '#' }
   ];
 
   return React.createElement(ServicePage, {
     accent: 'blue',
+    heroEyebrow: 'Websites',
     heroTitle: 'Website Development Company in Islamabad, Pakistan',
     heroDesc: 'ProfitSols creates stunning, responsive websites that help your business succeed online. We combine cutting-edge design with robust development to deliver websites that are fast, secure, and built for conversions.',
     servicesTitle: 'Website Development Services',

@@ -80,12 +80,10 @@ html {
 
 body {
   font-family: var(--font-family);
-  color: var(--color-dark);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--color-white);
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;

@@ -1,29 +1,56 @@
 [
   {
     "id": "1",
+    "slug": "assisme",
     "title": "AssisMe",
+    "summary": "A job board where candidates stand out with video resumes and employers post engaging video job listings.",
     "description": "AssisMe is a Job Board Application to connect Employer with Employee the need was to create an application where candidates looking for a job can record a \"Video Resume\" To show case their talent and employer who is hiring can also create a \"Video job post\".",
-    "tags": ["Job Board Application", "Design", "Figma", "Adobe Photoshop"],
+    "tags": ["Job Board", "Mobile", "Video", "Figma"],
+    "role": "Product design & mobile development",
+    "year": "2024",
+    "duration": "6 months",
+    "stack": ["android", "kotlin", "figma", "firebase"],
     "logoUrl": "/images/portfolio/assisme-logo.png",
     "screens": [
       "/images/portfolio/assisme-screen1.png",
       "/images/portfolio/assisme-screen2.png",
       "/images/portfolio/assisme-screen3.png"
     ],
-    "linkUrl": "#"
+    "linkUrl": "",
+    "challenge": "Traditional CVs rarely capture communication skills and personality. Employers needed a faster way to shortlist while candidates wanted a fairer way to present themselves beyond bullet points.",
+    "solution": "We designed a dual-sided experience: rich video capture with compression and streaming-friendly pipelines, employer dashboards for reviewing applicants, and a calm UI that keeps the focus on people—not forms.",
+    "results": [
+      "Structured flows for record → preview → publish video profiles",
+      "Role-based dashboards for employers and candidates",
+      "Design system aligned for fast iteration in Figma"
+    ],
+    "highlights": ["Video resume pipeline", "Video job posts", "Discovery & search"]
   },
   {
-    "id": "1",
+    "id": "2",
+    "slug": "hotlyme",
     "title": "Hotlyme",
+    "summary": "Social experience for sharing updates and staying close to friends and family—with a polished, modern feed.",
     "description": "Hotlyme is a Social Media Application to connect with your friends and family and share your thoughts and ideas with them.",
-    "tags": ["Job Board Application", "Design", "Figma", "Adobe Photoshop"],
+    "tags": ["Social", "iOS", "Android", "Product"],
+    "role": "End-to-end product build",
+    "year": "2024",
+    "duration": "5 months",
+    "stack": ["react", "nodejs", "figma", "firebase"],
     "logoUrl": "/images/portfolio/assisme-logo.png",
     "screens": [
       "/images/portfolio/assisme-screen1.png",
       "/images/portfolio/assisme-screen2.png",
       "/images/portfolio/assisme-screen3.png"
     ],
-    "linkUrl": "#"
+    "linkUrl": "",
+    "challenge": "Users expect social apps to feel instant and expressive, while the product team needed a maintainable stack that could grow with new media types and moderation tools.",
+    "solution": "We shipped a composable feed architecture, real-time friendly data patterns, and a bold but readable visual language—tested for long scrolling sessions and accessibility basics.",
+    "results": [
+      "Composable post types and media cards",
+      "Realtime-ready client patterns",
+      "Scalable theming for future brand shifts"
+    ],
+    "highlights": ["Feed & composer UX", "Notifications", "Profile & social graph"]
   }
-
 ]

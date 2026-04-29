@@ -56,13 +56,15 @@ function WebAppPage() {
   ];
 
   var footerLinks = [
-    { label: 'About Us', to: '/#company' },
-    { label: 'Contact Us', to: '/#contact' },
+    { label: 'Company', to: '/company' },
+    { label: 'Contact', to: '/contact' },
+    { label: 'Portfolio', to: '/portfolio' },
     { label: 'Privacy Policy', to: '#' }
   ];
 
   return React.createElement(ServicePage, {
     accent: 'gold',
+    heroEyebrow: 'Web applications',
     heroTitle: 'Web App Development Company in Islamabad, Pakistan',
     heroDesc: 'ProfitSols builds powerful, scalable web applications that drive business efficiency. From progressive web apps to custom enterprise solutions, we deliver web applications that perform flawlessly and scale with your growth. Our team combines technical expertise with a deep understanding of business needs.',
     servicesTitle: 'Web App Development Services',

@@ -57,14 +57,15 @@ function MobileAppPage() {
   ];
 
   var footerLinks = [
-    { label: 'About Us', to: '/#company' },
-    { label: 'Contact Us', to: '/#contact' },
-    { label: 'Portfolio', to: '/#portfolio' },
+    { label: 'Company', to: '/company' },
+    { label: 'Contact', to: '/contact' },
+    { label: 'Portfolio', to: '/portfolio' },
     { label: 'Terms & Conditions', to: '#' }
   ];
 
   return React.createElement(ServicePage, {
     accent: 'blue',
+    heroEyebrow: 'Mobile apps',
     heroTitle: 'Mobile App Development Company in Islamabad, Pakistan',
     heroDesc: 'ProfitSols is your trusted partner for innovative mobile app development. We create user-centric, high-performance applications for iOS and Android that drive business growth. Our experienced team delivers quality solutions with a focus on innovation, user experience, and cutting-edge technology.',
     servicesTitle: 'Mobile App Development Services',

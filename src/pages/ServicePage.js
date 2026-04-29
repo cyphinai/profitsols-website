@@ -5,7 +5,39 @@ var useState = React.useState;
 var Link = require('react-router-dom').Link;
 var TechIcons = require('./TechIcons');
 var SharedHeader = require('../components/SharedHeader');
-require('./ServicePage.css');
+var CyberFooter = require('../components/CyberFooter');
+var RevealSection = require('../components/RevealSection');
+var CyberDecor = require('../components/CyberDecor');
+require('../styles/cyber-inner-page.css');
+
+var DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
+
+var TECH_ICON_PATH = {
+  WordPress: 'wordpress/wordpress-plain.svg',
+  HTML5: 'html5/html5-original.svg',
+  CSS3: 'css3/css3-original.svg',
+  JavaScript: 'javascript/javascript-original.svg',
+  React: 'react/react-original.svg',
+  Flutter: 'flutter/flutter-original.svg',
+  Java: 'java/java-original.svg',
+  Kotlin: 'kotlin/kotlin-original.svg',
+  'React Native': 'react/react-original.svg',
+  Swift: 'swift/swift-original.svg',
+  'Node.js': 'nodejs/nodejs-original.svg',
+  Figma: 'figma/figma-original.svg',
+  Sketch: 'sketch/sketch-original.svg',
+  'Adobe XD': 'xd/xd-plain.svg',
+  Photoshop: 'photoshop/photoshop-plain.svg',
+  MySQL: 'mysql/mysql-original.svg',
+  AWS: 'amazonwebservices/amazonwebservices-plain-wordmark.svg',
+  Firebase: 'firebase/firebase-plain.svg',
+  Python: 'python/python-original.svg'
+};
+
+function techIconSrc(name) {
+  var path = TECH_ICON_PATH[name];
+  return path ? DEVICON + '/' + path : null;
+}
 
 function IconArrowRight() {
   return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', width: '18', height: '18' },
@@ -14,21 +46,9 @@ function IconArrowRight() {
   );
 }
 
-function IconMail() {
-  return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', width: '18', height: '18' },
-    React.createElement('path', { d: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z' }),
-    React.createElement('polyline', { points: '22,6 12,13 2,6' })
-  );
-}
-
-function IconPhone() {
-  return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', width: '18', height: '18' },
-    React.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
-  );
-}
-
 function ServicePage(props) {
   var accent = props.accent || 'blue';
+  var heroEyebrow = props.heroEyebrow || 'Services';
   var heroTitle = props.heroTitle;
   var heroDesc = props.heroDesc;
   var servicesTitle = props.servicesTitle;
@@ -40,140 +60,146 @@ function ServicePage(props) {
   var portfolioTitle = props.portfolioTitle;
   var portfolioDesc = props.portfolioDesc;
   var contactTitle = props.contactTitle;
-  var footerServices = props.footerServices || [];
-  var footerLinks = props.footerLinks || [];
 
   var _useState = useState(0);
   var activeService = _useState[0];
   var setActiveService = _useState[1];
 
-  return React.createElement('div', { className: 'service-page' + (accent ? ' accent-' + accent : '') },
+  function renderTechIcon(name, i) {
+    var src = techIconSrc(name);
+    var keyMap = { 'React Native': 'ReactNative', 'Node.js': 'Node', 'Adobe XD': 'AdobeXD' };
+    var iconKey = keyMap[name] || name.replace(/[\s.]/g, '');
+    var IconComp = TechIcons[iconKey] || TechIcons[name];
+    return React.createElement('div', { key: i, className: 'svc-tech-item' },
+      React.createElement('div', { className: 'svc-tech-icon' },
+        src
+          ? React.createElement('img', { src: src, alt: '', className: 'svc-tech-icon-img', width: 44, height: 44 })
+          : IconComp
+            ? React.createElement(IconComp, null)
+            : React.createElement('span', { className: 'svc-tech-fallback' }, name.charAt(0))
+      ),
+      React.createElement('span', { className: 'svc-tech-label' }, name)
+    );
+  }
+
+  return React.createElement('div', { className: 'cyber-inner-page service-page' + (accent ? ' accent-' + accent : '') },
     React.createElement(SharedHeader, null),
-    React.createElement('section', { className: 'service-hero' },
-      React.createElement('h1', null, heroTitle),
-      React.createElement('p', null, heroDesc)
-    ),
-    services.length > 0 && React.createElement('section', { className: 'service-section' },
-      React.createElement('h2', { className: 'service-section-title' }, servicesTitle),
-      React.createElement('div', { className: 'service-options-grid' },
-        React.createElement('div', { className: 'service-options-list' },
-          services.map(function(s, i) {
-            return React.createElement('div', {
-              key: i,
-              className: 'service-option-card' + (activeService === i ? ' active' : ''),
-              onClick: function() { setActiveService(i); }
-            },
-              React.createElement('span', { className: 'service-option-icon' }, s.icon),
-              React.createElement('span', { className: 'service-option-text' }, s.title)
+    React.createElement('main', { className: 'cyber-inner-main' },
+      React.createElement('section', { className: 'cyber-inner-hero' },
+        React.createElement('div', { className: 'cyber-inner-hero-grid', 'aria-hidden': true }),
+        React.createElement(CyberDecor.DecoHeroVectors, null),
+        React.createElement('div', { className: 'cyber-inner-hero-inner' },
+          React.createElement('p', { className: 'cyber-inner-eyebrow' }, heroEyebrow),
+          React.createElement('h1', { className: 'cyber-inner-title' }, heroTitle),
+          React.createElement('p', { className: 'cyber-inner-lead' }, heroDesc)
+        )
+      ),
+
+      services.length > 0 && React.createElement(RevealSection, { className: 'cyber-inner-section-wrap svc-offerings' },
+        React.createElement(CyberDecor.DecoSectionMesh, null),
+        React.createElement('h2', { className: 'cyber-inner-section-title' }, servicesTitle),
+        React.createElement('div', { className: 'svc-options-grid' },
+          React.createElement('div', { className: 'svc-options-list' },
+            services.map(function(s, i) {
+              return React.createElement('div', {
+                key: i,
+                className: 'svc-option-card' + (activeService === i ? ' active' : ''),
+                onClick: function() { setActiveService(i); },
+                role: 'button',
+                tabIndex: 0,
+                onKeyDown: function(e) {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setActiveService(i);
+                  }
+                }
+              },
+                React.createElement('span', { className: 'svc-option-icon' }, s.icon),
+                React.createElement('span', { className: 'svc-option-text' }, s.title)
+              );
+            })
+          ),
+          React.createElement('div', { className: 'svc-desc-card' },
+            services[activeService].desc.map(function(p, i) {
+              return React.createElement('p', { key: i }, p);
+            })
+          )
+        )
+      ),
+
+      processSteps.length > 0 && React.createElement(RevealSection, { className: 'cyber-inner-section-wrap svc-process' },
+        React.createElement('h2', { className: 'cyber-inner-section-title' }, processTitle),
+        React.createElement('div', { className: 'svc-process-grid' },
+          processSteps.map(function(step, i) {
+            var n = i + 1;
+            var num = n < 10 ? '0' + n : String(n);
+            return React.createElement('div', { key: i, className: 'svc-process-step' },
+              React.createElement('div', { className: 'svc-process-num' }, num),
+              React.createElement('h3', { className: 'svc-process-title' }, step.title),
+              React.createElement('p', { className: 'svc-process-desc' }, step.desc)
             );
           })
-        ),
-        React.createElement('div', { className: 'service-desc-card' },
-          services[activeService].desc.map(function(p, i) {
-            return React.createElement('p', { key: i }, p);
-          })
-        )
-      )
-    ),
-    processSteps.length > 0 && React.createElement('section', { className: 'service-process' },
-      React.createElement('h2', { className: 'service-section-title' }, processTitle),
-      React.createElement('div', { className: 'service-process-grid' },
-        processSteps.map(function(step, i) {
-          return React.createElement('div', { key: i, className: 'service-process-step' },
-            React.createElement('div', { className: 'service-process-num' }, String(i + 1).padStart(2, '0')),
-            React.createElement('h3', { className: 'service-process-title' }, step.title),
-            React.createElement('p', { className: 'service-process-desc' }, step.desc)
-          );
-        })
-      )
-    ),
-    techIcons.length > 0 && React.createElement('section', { className: 'service-tech' },
-      React.createElement('h2', { className: 'service-section-title' }, techTitle),
-      React.createElement('div', { className: 'service-tech-icons' },
-        techIcons.map(function(item, i) {
-          var name = typeof item === 'string' ? item : item.name;
-          var keyMap = { 'React Native': 'ReactNative', 'Node.js': 'Node', 'Adobe XD': 'AdobeXD' };
-          var iconKey = keyMap[name] || name.replace(/[\s.]/g, '');
-          var IconComp = TechIcons[iconKey] || TechIcons[name];
-          return React.createElement('div', { key: i, className: 'service-tech-item' },
-            React.createElement('div', { className: 'service-tech-icon' }, IconComp ? React.createElement(IconComp, null) : name.charAt(0)),
-            React.createElement('span', { className: 'service-tech-label' }, name)
-          );
-        })
-      )
-    ),
-    portfolioTitle && React.createElement('section', { className: 'service-portfolio' },
-      React.createElement('div', { className: 'service-portfolio-text' },
-        React.createElement('h2', { className: 'service-section-title', style: { textAlign: 'left', marginBottom: '24px' } }, portfolioTitle),
-        React.createElement('p', null, portfolioDesc),
-        React.createElement(Link, { to: '/#portfolio', className: 'service-portfolio-link' },
-          'View All',
-          React.createElement(IconArrowRight, null)
         )
       ),
-      React.createElement('div', { className: 'service-portfolio-visual' },
-        React.createElement('div', { className: 'service-portfolio-phones' },
-          React.createElement('div', { className: 'service-phone-mock left' },
-            React.createElement('div', { className: 'service-phone-screen' })
+
+      techIcons.length > 0 && React.createElement(RevealSection, { className: 'cyber-inner-section-wrap svc-tech' },
+        React.createElement('h2', { className: 'cyber-inner-section-title' }, techTitle),
+        React.createElement('div', { className: 'svc-tech-icons' },
+          techIcons.map(function(item, i) {
+            var name = typeof item === 'string' ? item : item.name;
+            return renderTechIcon(name, i);
+          })
+        )
+      ),
+
+      portfolioTitle && React.createElement(RevealSection, { className: 'cyber-inner-section-wrap' },
+        React.createElement('div', { className: 'svc-portfolio' },
+          React.createElement('div', { className: 'svc-portfolio-text' },
+            React.createElement('h2', { className: 'cyber-inner-section-title cyber-inner-section-title--left' }, portfolioTitle),
+            React.createElement('p', null, portfolioDesc),
+            React.createElement(Link, { to: '/portfolio', className: 'svc-portfolio-link' },
+              'View portfolio',
+              React.createElement(IconArrowRight, null)
+            )
           ),
-          React.createElement('div', { className: 'service-phone-mock mid' },
-            React.createElement('div', { className: 'service-phone-screen' })
+          React.createElement('div', { className: 'svc-portfolio-visual' },
+            React.createElement('div', { className: 'svc-portfolio-phones' },
+              React.createElement('div', { className: 'svc-phone-mock left' },
+                React.createElement('div', { className: 'svc-phone-screen' })
+              ),
+              React.createElement('div', { className: 'svc-phone-mock mid' },
+                React.createElement('div', { className: 'svc-phone-screen' })
+              ),
+              React.createElement('div', { className: 'svc-phone-mock right' },
+                React.createElement('div', { className: 'svc-phone-screen' })
+              )
+            )
+          )
+        )
+      ),
+
+      React.createElement(RevealSection, { className: 'cyber-inner-section-wrap svc-contact' },
+        React.createElement('div', { className: 'svc-contact-card' },
+          React.createElement('h2', { className: 'svc-contact-title' }, contactTitle),
+          React.createElement('p', { className: 'svc-contact-hint' },
+            'Share a short brief — we’ll follow up with next steps. Or visit our full contact page for more options.'
           ),
-          React.createElement('div', { className: 'service-phone-mock right' },
-            React.createElement('div', { className: 'service-phone-screen' })
+          React.createElement('form', { className: 'svc-contact-form', onSubmit: function(e) { e.preventDefault(); } },
+            React.createElement('div', { className: 'svc-contact-row' },
+              React.createElement('input', { type: 'text', placeholder: 'Name', required: true, 'aria-label': 'Name' }),
+              React.createElement('input', { type: 'email', placeholder: 'Email', required: true, 'aria-label': 'Email' })
+            ),
+            React.createElement('input', { type: 'tel', placeholder: 'Phone (optional)', 'aria-label': 'Phone' }),
+            React.createElement('textarea', { placeholder: 'Tell us about your project', rows: 4, 'aria-label': 'Message' }),
+            React.createElement('button', { type: 'submit', className: 'svc-btn-submit' }, 'Send message')
+          ),
+          React.createElement('p', { className: 'svc-contact-footer-note' },
+            React.createElement(Link, { to: '/contact' }, 'Open full contact page →')
           )
         )
       )
     ),
-    React.createElement('section', { className: 'service-contact' },
-      React.createElement('h2', { className: 'service-contact-title' }, contactTitle),
-      React.createElement('form', { className: 'service-contact-form', onSubmit: function(e) { e.preventDefault(); } },
-        React.createElement('div', { className: 'service-contact-row' },
-          React.createElement('input', { type: 'text', placeholder: 'Name', required: true }),
-          React.createElement('input', { type: 'email', placeholder: 'Email', required: true }),
-          React.createElement('input', { type: 'tel', placeholder: 'Phone number' })
-        ),
-        React.createElement('textarea', { placeholder: 'Message', rows: 5 }),
-        React.createElement('button', { type: 'submit', className: 'service-btn-submit' }, 'Submit')
-      )
-    ),
-    React.createElement('footer', { className: 'service-footer' },
-      React.createElement('div', { className: 'service-footer-cta' },
-        React.createElement('p', { className: 'service-footer-cta-text' }, 'Ready to build something great?'),
-        React.createElement(Link, { to: '/#contact', className: 'service-footer-cta-btn' },
-          'Get in Touch',
-          React.createElement('span', { className: 'service-footer-cta-arrow' }, '\u2192')
-        )
-      ),
-      React.createElement('div', { className: 'service-footer-inner' },
-        React.createElement('div', { className: 'service-footer-col service-footer-col-accent-cyan' },
-          React.createElement('h4', null, 'Services'),
-          footerServices.map(function(link, i) {
-            return React.createElement(Link, { key: i, to: link.to || '#' }, link.label);
-          })
-        ),
-        React.createElement('div', { className: 'service-footer-col service-footer-col-accent-gold' },
-          React.createElement('h4', null, 'Links'),
-          footerLinks.map(function(link, i) {
-            return React.createElement(Link, { key: i, to: link.to || '#' }, link.label);
-          })
-        ),
-        React.createElement('div', { className: 'service-footer-col service-footer-col-accent-pink' },
-          React.createElement('h4', null, 'Contact'),
-          React.createElement('a', { href: 'mailto:contact@profitsols.com', className: 'service-footer-contact' },
-            React.createElement(IconMail, null),
-            'contact@profitsols.com'
-          ),
-          React.createElement('a', { href: 'tel:+923087065507', className: 'service-footer-contact' },
-            React.createElement(IconPhone, null),
-            '+923087065507'
-          )
-        )
-      ),
-      React.createElement('div', { className: 'service-footer-bottom' },
-        React.createElement('p', null, 'Copyright © 2024 ProfitSols. All rights reserved.')
-      )
-    )
+    React.createElement(CyberFooter, null)
   );
 }
 

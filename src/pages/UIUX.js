@@ -58,14 +58,16 @@ function UIUXPage() {
   ];
 
   var footerLinks = [
-    { label: 'About Us', to: '/#company' },
-    { label: 'Contact Us', to: '/#contact' },
+    { label: 'Company', to: '/company' },
+    { label: 'Contact', to: '/contact' },
+    { label: 'Portfolio', to: '/portfolio' },
     { label: 'Privacy Policy', to: '#' },
     { label: 'Terms & Conditions', to: '#' }
   ];
 
   return React.createElement(ServicePage, {
     accent: 'pink',
+    heroEyebrow: 'Design',
     heroTitle: 'UI/UX Design Company in Islamabad, Pakistan',
     heroDesc: 'ProfitSols specializes in creating user-centered design solutions that elevate digital products. Our UI/UX team combines creativity with data-driven insights to design interfaces that are beautiful, functional, and intuitive. We help businesses create memorable user experiences that drive engagement and growth.',
     servicesTitle: 'UI/UX Design Services',

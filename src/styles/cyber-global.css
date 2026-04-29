@@ -1,0 +1,48 @@
+/* ProfitSols — global cyber theme tokens and base */
+
+:root {
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Sora', var(--font-family);
+  --cyber-bg-deep: #050a12;
+  --cyber-bg: #060b14;
+  --cyber-surface: rgba(12, 18, 32, 0.92);
+  --cyber-surface-2: rgba(18, 26, 44, 0.75);
+  --cyber-border: rgba(0, 203, 240, 0.14);
+  --cyber-border-strong: rgba(0, 203, 240, 0.28);
+  --cyber-text: rgba(255, 255, 255, 0.9);
+  --cyber-text-muted: rgba(255, 255, 255, 0.62);
+  --cyber-cyan: #00cbf0;
+  --cyber-gold: #d4ad39;
+  --cyber-pink: #ee2c65;
+  --cyber-navy: #00407f;
+  --cyber-glow-cyan: rgba(0, 203, 240, 0.35);
+  --cyber-radius: 16px;
+  --cyber-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cyber-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes cyber-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes cyber-pulse-border {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+body {
+  background: var(--cyber-bg-deep);
+  color: var(--cyber-text);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
