@@ -16,6 +16,10 @@
   margin: 0 auto;
   padding: 72px 24px 48px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .portfolio-hero-grid {
@@ -55,10 +59,12 @@
 .portfolio-lead {
   position: relative;
   max-width: 640px;
+  width: min(100%, 640px);
   font-size: 17px;
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.68);
   margin: 0 0 28px;
+  text-align: center;
 }
 
 .portfolio-hero-cta {
