@@ -19,7 +19,7 @@ function CompanyPage() {
   return React.createElement('div', { className: 'company-page cyber-inner-page' },
     React.createElement(SharedHeader, null),
     React.createElement('main', { className: 'cyber-inner-main' },
-      React.createElement('section', { className: 'cyber-inner-hero cyber-inner-hero--left' },
+      React.createElement('section', { className: 'cyber-inner-hero' },
         React.createElement('div', { className: 'cyber-inner-hero-grid', 'aria-hidden': true }),
         React.createElement(CyberDecor.DecoFloatingOrbs, null),
         React.createElement(CyberDecor.DecoHeroVectors, null),
