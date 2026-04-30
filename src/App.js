@@ -16,7 +16,8 @@ function lazyCjs(importer) {
   });
 }
 
-var HomePage = lazyCjs(function() { return import('./pages/Home'); });
+// Keep the home route eager to improve LCP/first paint.
+var HomePage = require('./pages/Home');
 var MobileAppPage = lazyCjs(function() { return import('./pages/MobileApp'); });
 var WebsitePage = lazyCjs(function() { return import('./pages/Website'); });
 var UIUXPage = lazyCjs(function() { return import('./pages/UIUX'); });
