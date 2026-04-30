@@ -7,9 +7,9 @@
 
 var React = require('react');
 var useEffect = React.useEffect;
+var useState = React.useState;
 var useRef = React.useRef;
 var Link = require('react-router-dom').Link;
-var initScrollHomeGsap = require('./initGsapScroll').initScrollHomeGsap;
 var ScrollHomeMoreSections = require('./ScrollHomeMoreSections');
 
 require('./style.css');
@@ -31,12 +31,59 @@ function IconArrow() {
 
 function ScrollHomepage() {
   var rootRef = useRef(null);
+  var _useState = useState(false);
+  var renderBelowFold = _useState[0];
+  var setRenderBelowFold = _useState[1];
 
   useEffect(function() {
     var el = rootRef.current;
     if (!el) return undefined;
-    var cleanup = initScrollHomeGsap(el);
-    return cleanup;
+    var cancelled = false;
+    var cleanup = function noop() {};
+
+    // Render below-the-fold panels after the browser is idle to reduce TBT.
+    var idleId = null;
+    var timeoutId = null;
+
+    var scheduleBelowFold = function() {
+      if (cancelled) return;
+      setRenderBelowFold(true);
+    };
+
+    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
+      idleId = window.requestIdleCallback(scheduleBelowFold, { timeout: 1500 });
+    } else {
+      timeoutId = setTimeout(scheduleBelowFold, 800);
+    }
+
+    // Defer GSAP/ScrollTrigger code too; it will no-op until panels exist.
+    // (Also guarded so it won't block first paint.)
+    var importGsap = function() {
+      import('./initGsapScroll').then(function(mod) {
+        if (cancelled) return;
+        var init = mod && (mod.initScrollHomeGsap || (mod.default && mod.default.initScrollHomeGsap));
+        if (typeof init === 'function') {
+          cleanup = init(el) || cleanup;
+        }
+      }).catch(function() {
+        // Non-fatal: homepage should still render without animations.
+      });
+    };
+
+    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(function() { if (!cancelled) importGsap(); }, { timeout: 2000 });
+    } else {
+      setTimeout(function() { if (!cancelled) importGsap(); }, 1200);
+    }
+
+    return function() {
+      cancelled = true;
+      if (idleId && typeof window !== 'undefined' && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) clearTimeout(timeoutId);
+      cleanup();
+    };
   }, []);
 
   return React.createElement('div', { className: 'scroll-homepage', ref: rootRef },
@@ -51,9 +98,9 @@ function ScrollHomepage() {
       ),
       React.createElement('div', { className: 'scroll-homepage__hero-inner' },
         React.createElement('p', { className: 'scroll-homepage__hero-eyebrow' }, 'ProfitSols'),
-        React.createElement('h1', { className: 'scroll-homepage__hero-title' }, 'Services we offer to our clients'),
+        React.createElement('h1', { className: 'scroll-homepage__hero-title' }, 'Software Development Company in Islamabad, Pakistan'),
         React.createElement('p', { className: 'scroll-homepage__hero-sub' },
-          'Scroll to explore how we build mobile apps, websites, web applications, and product design — with engineering discipline and a premium, modern experience.'
+          'We build fast, scalable digital products — mobile apps, websites, web applications, and UI/UX design — with engineering discipline and a premium, modern experience.'
         )
       ),
       React.createElement('div', { className: 'scroll-homepage__scroll-hint' },
@@ -64,91 +111,92 @@ function ScrollHomepage() {
       )
     ),
 
-    /* --- Mobile App Development --- */
-    React.createElement('section', { className: 'scroll-panel scroll-panel--mobile', 'aria-labelledby': 'sh-mobile-title' },
-      React.createElement('div', { className: 'scroll-panel__inner' },
-        React.createElement('div', { className: 'scroll-panel__visual' },
-          React.createElement('div', { className: 'scroll-panel__glow-card' }),
-          React.createElement('div', { className: 'scroll-phone-stage' },
-            React.createElement('div', { className: 'scroll-phone-ring', 'aria-hidden': true }),
-            React.createElement('div', { className: 'scroll-phone-group js-phone-group' },
-              React.createElement('div', { className: 'scroll-tech-pill scroll-tech-pill--android js-android' },
-                React.createElement('div', { className: 'scroll-tech-pill__icon' },
-                  React.createElement('img', { src: CDN + '/android/android-original.svg', alt: '' })
-                ),
-                React.createElement('div', { className: 'scroll-tech-pill__meta' },
-                  React.createElement('span', { className: 'scroll-tech-pill__name' }, 'Android'),
-                  React.createElement('span', { className: 'scroll-tech-pill__sub' }, 'Kotlin · Jetpack')
-                )
-              ),
-              React.createElement('div', { className: 'scroll-phone' },
-                React.createElement('div', { className: 'scroll-phone__notch' }),
-                React.createElement('div', { className: 'scroll-phone__screen' },
-                  React.createElement('div', { className: 'scroll-phone__status' },
-                    React.createElement('span', { className: 'scroll-phone__time' }, '9:41'),
-                    React.createElement('div', { className: 'scroll-phone__status-icons' },
-                      React.createElement('span', { className: 'scroll-phone__wifi' }),
-                      React.createElement('span', { className: 'scroll-phone__battery' })
-                    )
+    renderBelowFold ? React.createElement(React.Fragment, null,
+      /* --- Mobile App Development --- */
+      React.createElement('section', { className: 'scroll-panel scroll-panel--mobile', 'aria-labelledby': 'sh-mobile-title' },
+        React.createElement('div', { className: 'scroll-panel__inner' },
+          React.createElement('div', { className: 'scroll-panel__visual' },
+            React.createElement('div', { className: 'scroll-panel__glow-card' }),
+            React.createElement('div', { className: 'scroll-phone-stage' },
+              React.createElement('div', { className: 'scroll-phone-ring', 'aria-hidden': true }),
+              React.createElement('div', { className: 'scroll-phone-group js-phone-group' },
+                React.createElement('div', { className: 'scroll-tech-pill scroll-tech-pill--android js-android' },
+                  React.createElement('div', { className: 'scroll-tech-pill__icon' },
+                    React.createElement('img', { src: CDN + '/android/android-original.svg', alt: '', loading: 'lazy', decoding: 'async' })
                   ),
-                  React.createElement('div', { className: 'scroll-phone__app-header' },
-                    React.createElement('span', { className: 'scroll-phone__app-title' }, 'Product'),
-                    React.createElement('span', { className: 'scroll-phone__app-badge' }, 'PRO')
-                  ),
-                  React.createElement('div', { className: 'scroll-phone__hero-card' },
-                    React.createElement('span', { className: 'scroll-phone__hero-label' }, 'Revenue'),
-                    React.createElement('span', { className: 'scroll-phone__hero-value' }, '$48.2k'),
-                    React.createElement('span', { className: 'scroll-phone__hero-delta' }, '+12.4%')
-                  ),
-                  React.createElement('div', { className: 'scroll-phone__mini-grid' },
-                    React.createElement('div', { className: 'scroll-phone__mini' }),
-                    React.createElement('div', { className: 'scroll-phone__mini' }),
-                    React.createElement('div', { className: 'scroll-phone__mini' }),
-                    React.createElement('div', { className: 'scroll-phone__mini' })
-                  ),
-                  React.createElement('div', { className: 'scroll-phone__chart' },
-                    React.createElement('div', { className: 'scroll-phone__bar', style: { height: '32%' } }),
-                    React.createElement('div', { className: 'scroll-phone__bar', style: { height: '55%' } }),
-                    React.createElement('div', { className: 'scroll-phone__bar', style: { height: '42%' } }),
-                    React.createElement('div', { className: 'scroll-phone__bar', style: { height: '70%' } }),
-                    React.createElement('div', { className: 'scroll-phone__bar', style: { height: '38%' } }),
-                    React.createElement('div', { className: 'scroll-phone__bar', style: { height: '62%' } })
-                  ),
-                  React.createElement('div', { className: 'scroll-phone__nav-dots' },
-                    React.createElement('span', null),
-                    React.createElement('span', { className: 'is-active' }, null),
-                    React.createElement('span', null)
+                  React.createElement('div', { className: 'scroll-tech-pill__meta' },
+                    React.createElement('span', { className: 'scroll-tech-pill__name' }, 'Android'),
+                    React.createElement('span', { className: 'scroll-tech-pill__sub' }, 'Kotlin · Jetpack')
                   )
-                )
-              ),
-              React.createElement('div', { className: 'scroll-tech-pill scroll-tech-pill--ios js-ios' },
-                React.createElement('div', { className: 'scroll-tech-pill__icon' },
-                  React.createElement('img', { src: CDN + '/swift/swift-original.svg', alt: '' })
                 ),
-                React.createElement('div', { className: 'scroll-tech-pill__meta' },
-                  React.createElement('span', { className: 'scroll-tech-pill__name' }, 'iOS'),
-                  React.createElement('span', { className: 'scroll-tech-pill__sub' }, 'Swift · SwiftUI')
+                React.createElement('div', { className: 'scroll-phone' },
+                  React.createElement('div', { className: 'scroll-phone__notch' }),
+                  React.createElement('div', { className: 'scroll-phone__screen' },
+                    React.createElement('div', { className: 'scroll-phone__status' },
+                      React.createElement('span', { className: 'scroll-phone__time' }, '9:41'),
+                      React.createElement('div', { className: 'scroll-phone__status-icons' },
+                        React.createElement('span', { className: 'scroll-phone__wifi' }),
+                        React.createElement('span', { className: 'scroll-phone__battery' })
+                      )
+                    ),
+                    React.createElement('div', { className: 'scroll-phone__app-header' },
+                      React.createElement('span', { className: 'scroll-phone__app-title' }, 'Product'),
+                      React.createElement('span', { className: 'scroll-phone__app-badge' }, 'PRO')
+                    ),
+                    React.createElement('div', { className: 'scroll-phone__hero-card' },
+                      React.createElement('span', { className: 'scroll-phone__hero-label' }, 'Revenue'),
+                      React.createElement('span', { className: 'scroll-phone__hero-value' }, '$48.2k'),
+                      React.createElement('span', { className: 'scroll-phone__hero-delta' }, '+12.4%')
+                    ),
+                    React.createElement('div', { className: 'scroll-phone__mini-grid' },
+                      React.createElement('div', { className: 'scroll-phone__mini' }),
+                      React.createElement('div', { className: 'scroll-phone__mini' }),
+                      React.createElement('div', { className: 'scroll-phone__mini' }),
+                      React.createElement('div', { className: 'scroll-phone__mini' })
+                    ),
+                    React.createElement('div', { className: 'scroll-phone__chart' },
+                      React.createElement('div', { className: 'scroll-phone__bar', style: { height: '32%' } }),
+                      React.createElement('div', { className: 'scroll-phone__bar', style: { height: '55%' } }),
+                      React.createElement('div', { className: 'scroll-phone__bar', style: { height: '42%' } }),
+                      React.createElement('div', { className: 'scroll-phone__bar', style: { height: '70%' } }),
+                      React.createElement('div', { className: 'scroll-phone__bar', style: { height: '38%' } }),
+                      React.createElement('div', { className: 'scroll-phone__bar', style: { height: '62%' } })
+                    ),
+                    React.createElement('div', { className: 'scroll-phone__nav-dots' },
+                      React.createElement('span', null),
+                      React.createElement('span', { className: 'is-active' }, null),
+                      React.createElement('span', null)
+                    )
+                  )
+                ),
+                React.createElement('div', { className: 'scroll-tech-pill scroll-tech-pill--ios js-ios' },
+                  React.createElement('div', { className: 'scroll-tech-pill__icon' },
+                    React.createElement('img', { src: CDN + '/swift/swift-original.svg', alt: '', loading: 'lazy', decoding: 'async' })
+                  ),
+                  React.createElement('div', { className: 'scroll-tech-pill__meta' },
+                    React.createElement('span', { className: 'scroll-tech-pill__name' }, 'iOS'),
+                    React.createElement('span', { className: 'scroll-tech-pill__sub' }, 'Swift · SwiftUI')
+                  )
                 )
               )
             )
-          )
-        ),
-        React.createElement('div', { className: 'scroll-panel__content js-mobile-text' },
-          React.createElement('p', { className: 'scroll-panel__label' }, '01 — Mobile'),
-          React.createElement('h2', { id: 'sh-mobile-title', className: 'scroll-panel__title' }, 'Mobile App Development'),
-          React.createElement('p', { className: 'scroll-panel__desc' },
-            'Native and cross-platform apps for iOS and Android. We focus on performance, polished UX, and scalable architecture — from discovery to store release and beyond.'
           ),
-          React.createElement(Link, { to: '/mobile-app-development', className: 'scroll-panel__cta' },
-            'Read more',
-            React.createElement(IconArrow, null)
+          React.createElement('div', { className: 'scroll-panel__content js-mobile-text' },
+            React.createElement('p', { className: 'scroll-panel__label' }, '01 — Mobile'),
+            React.createElement('h2', { id: 'sh-mobile-title', className: 'scroll-panel__title' }, 'Mobile App Development'),
+            React.createElement('p', { className: 'scroll-panel__desc' },
+              'Native and cross-platform apps for iOS and Android. We focus on performance, polished UX, and scalable architecture — from discovery to store release and beyond.'
+            ),
+            React.createElement(Link, { to: '/mobile-app-development', className: 'scroll-panel__cta' },
+              'Read more',
+              React.createElement(IconArrow, null)
+            )
           )
         )
-      )
-    ),
+      ),
 
-    /* --- Website Development --- */
-    React.createElement('section', { className: 'scroll-panel scroll-panel--website', 'aria-labelledby': 'sh-web-title' },
+      /* --- Website Development --- */
+      React.createElement('section', { className: 'scroll-panel scroll-panel--website', 'aria-labelledby': 'sh-web-title' },
       React.createElement('div', { className: 'scroll-panel__inner' },
         React.createElement('div', { className: 'scroll-panel__visual' },
           React.createElement('div', { className: 'scroll-panel__glow-card' }),
@@ -208,7 +256,7 @@ function ScrollHomepage() {
                     )
                   ),
                   React.createElement('div', { className: 'scroll-chrome-badge js-chrome-logo' },
-                    React.createElement('img', { src: CDN + '/chrome/chrome-original.svg', alt: '' })
+                    React.createElement('img', { src: CDN + '/chrome/chrome-original.svg', alt: '', loading: 'lazy', decoding: 'async' })
                   )
                 )
               )
@@ -229,10 +277,10 @@ function ScrollHomepage() {
           )
         )
       )
-    ),
+      ),
 
-    /* --- Web App Development --- */
-    React.createElement('section', { className: 'scroll-panel scroll-panel--webapp', 'aria-labelledby': 'sh-webapp-title' },
+      /* --- Web App Development --- */
+      React.createElement('section', { className: 'scroll-panel scroll-panel--webapp', 'aria-labelledby': 'sh-webapp-title' },
       React.createElement('div', { className: 'scroll-panel__inner' },
         React.createElement('div', { className: 'scroll-panel__visual' },
           React.createElement('div', { className: 'scroll-panel__glow-card' }),
@@ -301,8 +349,8 @@ function ScrollHomepage() {
               )
             ),
             React.createElement('div', { className: 'scroll-dashboard__float js-react-badge' },
-              React.createElement('img', { src: CDN + '/react/react-original.svg', alt: '', className: 'scroll-dashboard__react' }),
-              React.createElement('img', { src: CDN + '/nodejs/nodejs-original.svg', alt: '', className: 'scroll-dashboard__node' })
+              React.createElement('img', { src: CDN + '/react/react-original.svg', alt: '', className: 'scroll-dashboard__react', loading: 'lazy', decoding: 'async' }),
+              React.createElement('img', { src: CDN + '/nodejs/nodejs-original.svg', alt: '', className: 'scroll-dashboard__node', loading: 'lazy', decoding: 'async' })
             )
           )
         ),
@@ -318,10 +366,10 @@ function ScrollHomepage() {
           )
         )
       )
-    ),
+      ),
 
-    /* --- UI/UX Design --- */
-    React.createElement('section', { className: 'scroll-panel scroll-panel--uiux', 'aria-labelledby': 'sh-uiux-title' },
+      /* --- UI/UX Design --- */
+      React.createElement('section', { className: 'scroll-panel scroll-panel--uiux', 'aria-labelledby': 'sh-uiux-title' },
       React.createElement('div', { className: 'scroll-panel__inner' },
         React.createElement('div', { className: 'scroll-panel__visual' },
           React.createElement('div', { className: 'scroll-panel__glow-card' }),
@@ -365,7 +413,9 @@ function ScrollHomepage() {
               React.createElement('img', {
                 className: 'scroll-artboard__figma js-figma-badge',
                 src: CDN + '/figma/figma-original.svg',
-                alt: ''
+                alt: '',
+                loading: 'lazy',
+                decoding: 'async'
               })
             )
           )
@@ -382,10 +432,11 @@ function ScrollHomepage() {
           )
         )
       )
-    ),
+      ),
 
-    React.createElement(ScrollHomeMoreSections, null),
-    React.createElement('div', { className: 'scroll-homepage__end-spacer', 'aria-hidden': true })
+      React.createElement(ScrollHomeMoreSections, null),
+      React.createElement('div', { className: 'scroll-homepage__end-spacer', 'aria-hidden': true })
+    ) : null
   );
 }
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>ProfitSols</title>
+    <script>
+      // SPA redirect for GitHub Pages (serves index.html for client-side routes)
+      (function () {
+        var l = window.location;
+        var base = "/profitsols-website";
+        var path = l.pathname;
+        if (path.indexOf(base) !== 0) {
+          l.replace(base + "/");
+          return;
+        }
+        var route = path.slice(base.length) + l.search + l.hash;
+        l.replace(base + "/?p=" + encodeURIComponent(route));
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
+

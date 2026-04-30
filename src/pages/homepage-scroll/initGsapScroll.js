@@ -13,6 +13,8 @@ function initScrollHomeGsap(root) {
     return function noop() {};
   }
 
+  // NOTE: this file is dynamically imported from ScrollHomepage,
+  // so its heavy deps won't be on the critical rendering path.
   gsap.registerPlugin(ScrollTrigger);
 
   var ctx = gsap.context(function() {
