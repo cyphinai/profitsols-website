@@ -168,7 +168,7 @@ function ScrollHomeMoreSections() {
                   var sc = activeItem.screens;
                   var src = sc && (sc[1] || sc[0]);
                   return src
-                    ? React.createElement('img', { src: src, alt: '', className: 'sh-more__case-screen' })
+                    ? React.createElement('img', { src: src, alt: '', className: 'sh-more__case-screen', loading: 'lazy', decoding: 'async', width: 900, height: 1600 })
                     : React.createElement('div', { className: 'sh-more__case-placeholder' }, 'Preview');
                 })()
               )

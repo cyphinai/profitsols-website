@@ -75,7 +75,9 @@ function Footer() {
 function Home() {
   return React.createElement('div', { className: 'home-page' },
     React.createElement(SharedHeader, null),
-    React.createElement(ScrollHomepage, null),
+    React.createElement('main', { id: 'main-content' },
+      React.createElement(ScrollHomepage, null)
+    ),
     React.createElement(Footer, null)
   );
 }

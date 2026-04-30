@@ -56,9 +56,11 @@ function ScrollHomepage() {
       timeoutId = setTimeout(scheduleBelowFold, 800);
     }
 
-    // Defer GSAP/ScrollTrigger code too; it will no-op until panels exist.
-    // (Also guarded so it won't block first paint.)
+    // Load GSAP only when the user starts scrolling (reduces unused JS + TBT).
+    var gsapLoaded = false;
     var importGsap = function() {
+      if (gsapLoaded || cancelled) return;
+      gsapLoaded = true;
       import('./initGsapScroll').then(function(mod) {
         if (cancelled) return;
         var init = mod && (mod.initScrollHomeGsap || (mod.default && mod.default.initScrollHomeGsap));
@@ -70,10 +72,21 @@ function ScrollHomepage() {
       });
     };
 
-    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
-      window.requestIdleCallback(function() { if (!cancelled) importGsap(); }, { timeout: 2000 });
-    } else {
-      setTimeout(function() { if (!cancelled) importGsap(); }, 1200);
+    var onFirstScroll = function() {
+      importGsap();
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', onFirstScroll, { passive: true });
+        window.removeEventListener('wheel', onFirstScroll, { passive: true });
+        window.removeEventListener('touchstart', onFirstScroll, { passive: true });
+        window.removeEventListener('keydown', onFirstScroll);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', onFirstScroll, { passive: true });
+      window.addEventListener('wheel', onFirstScroll, { passive: true });
+      window.addEventListener('touchstart', onFirstScroll, { passive: true });
+      window.addEventListener('keydown', onFirstScroll);
     }
 
     return function() {
@@ -82,6 +95,12 @@ function ScrollHomepage() {
         window.cancelIdleCallback(idleId);
       }
       if (timeoutId) clearTimeout(timeoutId);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', onFirstScroll, { passive: true });
+        window.removeEventListener('wheel', onFirstScroll, { passive: true });
+        window.removeEventListener('touchstart', onFirstScroll, { passive: true });
+        window.removeEventListener('keydown', onFirstScroll);
+      }
       cleanup();
     };
   }, []);
@@ -188,7 +207,7 @@ function ScrollHomepage() {
               'Native and cross-platform apps for iOS and Android. We focus on performance, polished UX, and scalable architecture — from discovery to store release and beyond.'
             ),
             React.createElement(Link, { to: '/mobile-app-development', className: 'scroll-panel__cta' },
-              'Read more',
+              'Explore mobile app development',
               React.createElement(IconArrow, null)
             )
           )
@@ -272,7 +291,7 @@ function ScrollHomepage() {
             'Fast, responsive, SEO-aware sites with a premium visual language. We ship clean code, accessible layouts, and content systems your team can grow with.'
           ),
           React.createElement(Link, { to: '/website-development', className: 'scroll-panel__cta' },
-            'Read more',
+            'Explore website development',
             React.createElement(IconArrow, null)
           )
         )
@@ -361,7 +380,7 @@ function ScrollHomepage() {
             'Dashboards, SaaS, and internal tools with robust APIs and modern frontends. Built for reliability, observability, and iterative delivery.'
           ),
           React.createElement(Link, { to: '/web-app-development', className: 'scroll-panel__cta' },
-            'Read more',
+            'Explore web app development',
             React.createElement(IconArrow, null)
           )
         )
@@ -427,7 +446,7 @@ function ScrollHomepage() {
             'Research-backed interfaces, design systems, and prototypes that align stakeholders and developers. We design for clarity, conversion, and accessibility.'
           ),
           React.createElement(Link, { to: '/ui-ux-development', className: 'scroll-panel__cta' },
-            'Read more',
+            'Explore UI/UX design',
             React.createElement(IconArrow, null)
           )
         )
