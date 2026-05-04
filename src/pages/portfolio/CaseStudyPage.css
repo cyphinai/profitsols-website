@@ -8,7 +8,7 @@
 
 .case-study-main {
   flex: 1;
-  padding-top: var(--header-height, 80px);
+  padding-top: var(--header-height, 92px);
 }
 
 .case-study-icon {

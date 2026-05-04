@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Profitsols P mark">
+  <defs>
+    <linearGradient id="pBrand" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#5EECD5"/>
+      <stop offset="30%" stop-color="#9787FF"/>
+      <stop offset="58%" stop-color="#DA47E8"/>
+      <stop offset="100%" stop-color="#FF6B5C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#050a12"/>
+  <!-- Horizontal mirror (flip) around vertical center, after upside-down rotation -->
+  <g transform="translate(512 0) scale(-1 1)">
+    <g transform="rotate(180 256 256)">
+      <path
+        fill="url(#pBrand)"
+        fill-rule="nonzero"
+        shape-rendering="geometricPrecision"
+        d="M318.00 405.20 Q303.60 416.00 287.01 409.02 L141.59 347.88 Q125.00 340.90 136.86 327.36 L139.94 323.84 Q151.80 310.30 169.80 310.17 L324.30 309.03 Q342.30 308.90 356.68 298.07 L374.12 284.93 Q388.50 274.10 384.91 256.46 L380.19 233.34 Q376.60 215.70 360.82 207.04 L298.58 172.86 Q282.80 164.20 281.31 146.26 L279.79 127.84 Q278.30 109.90 295.78 114.19 L408.22 141.81 Q425.70 146.10 431.87 163.01 L461.13 243.29 Q467.30 260.20 464.50 277.98 L464.20 279.92 Q461.40 297.70 447.00 308.50 Z M226.30 267.10 Q214.30 267.10 210.27 255.80 L158.39 110.28 Q154.80 100.20 154.80 89.50 L154.80 88.60 Q154.80 77.90 162.62 70.59 L181.74 52.70 Q190.50 44.50 194.01 55.98 L234.59 188.82 Q238.10 200.30 246.87 208.49 L253.65 214.81 Q262.00 222.60 273.42 222.60 L274.38 222.60 Q285.80 222.60 295.49 228.65 L312.46 239.25 Q321.50 244.90 321.50 255.56 L321.50 256.44 Q321.50 267.10 310.84 267.10 Z"
+      />
+    </g>
+  </g>
+</svg>

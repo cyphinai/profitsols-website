@@ -117,14 +117,144 @@
 .logo.logo--cyber {
   position: relative;
   z-index: 1;
-  gap: 12px;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0;
   color: rgba(255, 255, 255, 0.92);
-  padding: 6px 10px 6px 4px;
-  margin-left: -4px;
+  padding: 4px 8px 4px 2px;
+  margin: 4px 10px 4px 0;
   border-radius: 14px;
   transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   border: 1px solid transparent;
+}
+
+/* Reference-style lockup: mark | PROFIT + gradient SOLS / tagline / shimmer rule */
+.logo-lockup {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: clamp(12px, 1.6vw, 20px);
+}
+
+.logo-lockup__mark.logo-icon--cyber {
+  width: clamp(54px, 6.2vw, 72px);
+  height: clamp(54px, 6.2vw, 72px);
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.logo-lockup__type {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.logo-lockup__title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0;
+  font-family: var(--font-display, 'Sora', sans-serif);
+  font-size: clamp(13px, 1.35vw, 16px);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.logo-lockup__profit {
+  color: #ffffff;
+  letter-spacing: 0.12em;
+}
+
+.logo-lockup__sols {
+  margin-left: 0.02em;
+  letter-spacing: 0.12em;
+  background: linear-gradient(105deg, #5eecd5 0%, #9787ff 38%, #da47e8 72%, #ff6b5c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@supports not (background-clip: text) {
+  .logo-lockup__sols {
+    color: #9787ff;
+    -webkit-text-fill-color: unset;
+    background: none;
+  }
+}
+
+.logo-lockup__tag {
+  margin-top: 5px;
+  font-family: var(--font-display, 'Sora', sans-serif);
+  font-size: clamp(7px, 0.78vw, 8.5px);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.88);
+  background: linear-gradient(90deg, rgba(190, 255, 245, 0.95) 0%, rgba(210, 205, 255, 0.9) 45%, rgba(255, 180, 200, 0.88) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@supports not (background-clip: text) {
+  .logo-lockup__tag {
+    color: rgba(255, 255, 255, 0.82);
+    -webkit-text-fill-color: unset;
+    background: none;
+  }
+}
+
+.logo-lockup__rule {
+  display: block;
+  margin-top: 6px;
+  height: 1px;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(94, 236, 213, 0.25) 8%,
+    rgba(151, 135, 255, 0.55) 38%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(218, 71, 232, 0.55) 62%,
+    rgba(255, 107, 92, 0.3) 92%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 10px rgba(94, 236, 213, 0.55),
+    0 0 18px rgba(151, 135, 255, 0.45),
+    0 0 28px rgba(218, 71, 232, 0.25);
+}
+
+.logo.logo--cyber:hover .logo-lockup__rule {
+  box-shadow:
+    0 0 12px rgba(94, 236, 213, 0.65),
+    0 0 22px rgba(151, 135, 255, 0.5),
+    0 0 32px rgba(218, 71, 232, 0.32);
+}
+
+@media (max-width: 480px) {
+  .logo-lockup__mark.logo-icon--cyber {
+    width: clamp(46px, 14vw, 56px);
+    height: clamp(46px, 14vw, 56px);
+  }
+
+  .logo-lockup__tag {
+    letter-spacing: 0.14em;
+  }
+
+  .logo-lockup__title {
+    font-size: clamp(12px, 3.2vw, 14px);
+    letter-spacing: 0.08em;
+  }
 }
 
 .logo.logo--cyber:hover {
@@ -132,12 +262,15 @@
   border-color: rgba(0, 203, 240, 0.12);
 }
 
-.logo.logo--cyber.logo--cyber-active {
-  background: linear-gradient(135deg, rgba(0, 203, 240, 0.14), rgba(0, 64, 127, 0.12));
-  border-color: rgba(0, 203, 240, 0.35);
-  box-shadow:
-    0 0 28px rgba(0, 203, 240, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+/* No “active page” pill on the logo — only hover. Keyboard users still get a clear focus ring. */
+.logo.logo--cyber:focus {
+  outline: none;
+}
+
+.logo.logo--cyber:focus-visible {
+  outline: 2px solid rgba(0, 203, 240, 0.55);
+  outline-offset: 3px;
+  border-radius: 14px;
 }
 
 .logo-text.logo-text--cyber {
@@ -292,82 +425,136 @@
   flex-shrink: 0;
 }
 
-/* Cyberpunk logo animation */
+/* Brand P mark (navbar): orbital rings + breathe + theme glow */
 .logo-icon--cyber {
   overflow: visible;
 }
 
-.logo-icon--cyber .p-mark {
-  transform-origin: 32px 32px;
-  animation: ps-logo-breathe 2.8s ease-in-out infinite;
+.logo-icon--cyber .logo-p-deco {
+  pointer-events: none;
 }
 
-.logo-icon--cyber .p-outline {
-  animation: ps-logo-flicker 4.2s steps(1, end) infinite;
+.logo-icon--cyber .logo-p-orbit--cw {
+  transform-origin: 256px 256px;
+  transform-box: fill-box;
+  animation: ps-logo-orbit-cw 11s linear infinite;
 }
 
-.logo-icon--cyber .scanline {
-  animation: ps-logo-scan 1.6s linear infinite;
-  mix-blend-mode: screen;
+.logo-icon--cyber .logo-p-orbit--ccw {
+  transform-origin: 256px 256px;
+  transform-box: fill-box;
+  animation: ps-logo-orbit-ccw 16s linear infinite;
 }
 
-.logo-icon--cyber .circuit {
-  stroke-dasharray: 10 10;
-  animation: ps-logo-trace 1.9s linear infinite;
-  opacity: 0.95;
+@keyframes ps-logo-orbit-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.logo-icon--cyber .circuit--b { animation-duration: 2.3s; animation-direction: reverse; opacity: 0.85; }
-.logo-icon--cyber .circuit--c { animation-duration: 2.1s; }
-.logo-icon--cyber .circuit--d { animation-duration: 2.6s; animation-direction: reverse; opacity: 0.8; }
-
-.logo-icon--cyber .node {
-  animation: ps-logo-node 1.8s ease-in-out infinite;
+@keyframes ps-logo-orbit-ccw {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 
-.logo-icon--cyber .node:nth-of-type(2) { animation-delay: -0.4s; }
-.logo-icon--cyber .node:nth-of-type(3) { animation-delay: -0.9s; }
+.logo-icon--cyber .logo-p-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ps-logo-node-pulse 2.4s ease-in-out infinite;
+}
+
+.logo-icon--cyber .logo-p-node-wrap--b .logo-p-node {
+  animation-delay: 0.35s;
+}
+
+.logo-icon--cyber .logo-p-node-wrap--c .logo-p-node {
+  animation-delay: 0.7s;
+}
+
+@keyframes ps-logo-node-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.78);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.logo-icon--cyber .logo-p-ticks {
+  animation: ps-logo-ticks 3.5s ease-in-out infinite;
+}
+
+@keyframes ps-logo-ticks {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.logo-icon--cyber .logo-p-mark {
+  transform-origin: 256px 256px;
+  transform-box: fill-box;
+  animation:
+    ps-logo-breathe 2.8s ease-in-out infinite,
+    ps-logo-glow-shift 4.2s ease-in-out infinite;
+}
 
 @keyframes ps-logo-breathe {
   0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.03) rotate(-0.6deg); }
+  50% { transform: scale(1.04) rotate(-0.5deg); }
 }
 
-@keyframes ps-logo-scan {
-  0% { transform: translateY(-6px); opacity: 0; }
-  10% { opacity: 0.95; }
-  60% { opacity: 0.35; }
-  100% { transform: translateY(54px); opacity: 0; }
-}
-
-@keyframes ps-logo-trace {
-  0% { stroke-dashoffset: 0; filter: drop-shadow(0 0 2px rgba(0,203,240,0.35)); }
-  100% { stroke-dashoffset: 40; filter: drop-shadow(0 0 6px rgba(238,44,101,0.25)); }
-}
-
-@keyframes ps-logo-flicker {
-  0%, 100% { opacity: 0.85; }
-  2% { opacity: 0.3; }
-  4% { opacity: 0.95; }
-  8% { opacity: 0.6; }
-  12% { opacity: 1; }
-  40% { opacity: 0.75; }
-  42% { opacity: 0.25; }
-  44% { opacity: 0.95; }
-}
-
-@keyframes ps-logo-node {
-  0%, 100% { transform: scale(1); opacity: 0.85; }
-  50% { transform: scale(1.45); opacity: 1; }
+@keyframes ps-logo-glow-shift {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 6px rgba(94, 236, 213, 0.42))
+      drop-shadow(0 0 14px rgba(151, 135, 255, 0.28));
+  }
+  35% {
+    filter:
+      drop-shadow(0 0 8px rgba(151, 135, 255, 0.4))
+      drop-shadow(0 0 16px rgba(218, 71, 232, 0.26));
+  }
+  70% {
+    filter:
+      drop-shadow(0 0 7px rgba(255, 107, 92, 0.34))
+      drop-shadow(0 0 14px rgba(94, 236, 213, 0.22));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-icon--cyber .p-mark,
-  .logo-icon--cyber .p-outline,
-  .logo-icon--cyber .scanline,
-  .logo-icon--cyber .circuit,
-  .logo-icon--cyber .node {
+  .logo-icon--cyber .logo-p-mark {
     animation: none !important;
+    filter: none !important;
+  }
+
+  .logo-icon--cyber .logo-p-orbit--cw,
+  .logo-icon--cyber .logo-p-orbit--ccw {
+    animation: none !important;
+  }
+
+  .logo-icon--cyber .logo-p-node {
+    animation: none !important;
+    opacity: 0.9;
+    transform: none !important;
+  }
+
+  .logo-icon--cyber .logo-p-ticks {
+    animation: none !important;
+    opacity: 0.55;
   }
 }
 
