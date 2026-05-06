@@ -30,6 +30,28 @@ function IconSend() {
   );
 }
 
+function IconInstagram() {
+  return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2' },
+    React.createElement('rect', { x: '2.5', y: '2.5', width: '19', height: '19', rx: '5' }),
+    React.createElement('circle', { cx: '12', cy: '12', r: '4.2' }),
+    React.createElement('circle', { cx: '17.4', cy: '6.6', r: '1' })
+  );
+}
+
+function IconFacebook() {
+  return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2' },
+    React.createElement('path', { d: 'M14 8h3V5h-3c-2.2 0-4 1.8-4 4v3H7v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z' })
+  );
+}
+
+function IconLinkedIn() {
+  return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2' },
+    React.createElement('path', { d: 'M4 9h4v11H4z' }),
+    React.createElement('path', { d: 'M6 4.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4z' }),
+    React.createElement('path', { d: 'M10 9h4v1.8c.6-1.1 1.9-2 3.8-2 3 0 4.2 2 4.2 5v6.2h-4V14.6c0-1.3-.2-2.4-1.7-2.4-1.7 0-2 1.3-2 2.7V20H10z' })
+  );
+}
+
 var TRUST_TECH = [
   { slug: 'react', path: 'react/react-original.svg' },
   { slug: 'nodejs', path: 'nodejs/nodejs-original.svg' },
@@ -115,6 +137,32 @@ function ContactPage() {
               React.createElement('strong', null, 'Phone'),
               React.createElement('br', null),
               '+923087065507'
+            )
+          ),
+          React.createElement('div', { className: 'contact-social' },
+            React.createElement('p', { className: 'contact-social-label' }, 'Social profiles'),
+            React.createElement('div', { className: 'contact-social-row' },
+              React.createElement('a', {
+                className: 'contact-social-link',
+                href: 'https://www.instagram.com/profitsols?igsh=MWpsZ2tyNDV3dzN6dQ==',
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                'aria-label': 'ProfitSols on Instagram (opens in new tab)'
+              }, React.createElement(IconInstagram, null), 'Instagram'),
+              React.createElement('a', {
+                className: 'contact-social-link',
+                href: 'https://www.facebook.com/share/17nANJcfu8/',
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                'aria-label': 'ProfitSols on Facebook (opens in new tab)'
+              }, React.createElement(IconFacebook, null), 'Facebook'),
+              React.createElement('a', {
+                className: 'contact-social-link',
+                href: 'https://www.linkedin.com/company/profitsols/',
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                'aria-label': 'ProfitSols on LinkedIn (opens in new tab)'
+              }, React.createElement(IconLinkedIn, null), 'LinkedIn')
             )
           ),
           React.createElement('div', { className: 'contact-info-note' },

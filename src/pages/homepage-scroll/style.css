@@ -1575,7 +1575,8 @@
   border-radius: var(--sh-radius-lg);
   background: var(--sh-surface);
   border: 1px solid var(--sh-border);
-  align-items: center;
+  /* Top-align both columns (logo/text + visual) */
+  align-items: start;
 }
 
 @media (max-width: 768px) {
@@ -1588,15 +1589,24 @@
 .sh-more__case-head {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   margin-bottom: 16px;
 }
 
 .sh-more__case-logo {
-  max-height: 40px;
+  /* Slightly larger logo in homepage case study card */
+  max-height: 78px;
+  max-width: 260px;
   width: auto;
   object-fit: contain;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 203, 240, 0.18);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
 }
 
 .sh-more__case-tags {
@@ -1633,6 +1643,78 @@
 .sh-more__case-visual {
   display: flex;
   justify-content: center;
+  align-self: start;
+}
+
+.sh-more__case-mac {
+  width: min(520px, 100%);
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sh-more__case-mac-top {
+  width: 100%;
+  height: 32px;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(180deg, #2a2f3a 0%, #1e232d 100%);
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: none;
+  box-shadow:
+    0 0 0 1px rgba(0, 203, 240, 0.06),
+    0 30px 70px rgba(0, 0, 0, 0.45);
+}
+
+.sh-more__case-mac-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #5c6578;
+  flex-shrink: 0;
+}
+
+.sh-more__case-mac-dot--red { background: #ff5f57; }
+.sh-more__case-mac-dot--yellow { background: #febc2e; }
+.sh-more__case-mac-dot--green { background: #28c840; }
+
+.sh-more__case-mac-screen {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #0a0e14;
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: none;
+  position: relative;
+}
+
+.sh-more__case-mac-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.sh-more__case-mac-stand {
+  width: 120px;
+  height: 18px;
+  margin: 10px auto 0;
+  background: linear-gradient(180deg, #3a4252, #252a35);
+  border-radius: 0 0 8px 8px;
+}
+
+.sh-more__case-mac-base {
+  width: 200px;
+  height: 8px;
+  margin: 0 auto;
+  background: #1a1f28;
+  border-radius: 0 0 6px 6px;
 }
 
 .sh-more__case-phone {

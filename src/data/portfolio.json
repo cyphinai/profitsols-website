@@ -52,5 +52,31 @@
       "Scalable theming for future brand shifts"
     ],
     "highlights": ["Feed & composer UX", "Notifications", "Profile & social graph"]
+  },
+  {
+    "id": "3",
+    "slug": "compassionatealliance",
+    "title": "Compassionate Alliance",
+    "summary": "A React.js website for a community support initiative, built for clarity, trust, and fast performance.",
+    "description": "Compassionate Alliance is a web platform that helps families quickly request funeral support, learn about membership, and access donation and support resources through a clean, accessible website experience.",
+    "tags": ["Website", "React.js", "Railway", "PostgreSQL", "Performance"],
+    "role": "Website development",
+    "year": "2026",
+    "stack": ["react", "railway", "postgresql"],
+    "logoUrl": "/images/portfolio/compassionatealliance-logo.png",
+    "screens": [
+      "/images/portfolio/compassionatealliance.jpg"
+    ],
+    "performanceImageUrl": "/images/portfolio/compassionatealliance-performance.png",
+    "performanceCaption": "GTmetrix report snapshot highlighting strong Core Web Vitals and load performance.",
+    "linkUrl": "https://www.compassionatealliance.live/",
+    "challenge": "Create a trustworthy, easy-to-navigate website that communicates services clearly and supports key actions (membership, support requests, donations) without friction—while staying fast on real devices.",
+    "solution": "We developed a React.js frontend with a clean information architecture and strong visual hierarchy, deployed on Railway with a PostgreSQL database for reliable data storage and future scalability.",
+    "results": [
+      "Fast-loading marketing and support flows (high Lighthouse/GTMetrix scores)",
+      "Responsive layout optimized for desktop and mobile",
+      "Deployment on Railway with PostgreSQL-backed data layer"
+    ],
+    "highlights": ["React.js website", "Railway hosting", "PostgreSQL database"]
   }
 ]

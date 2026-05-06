@@ -13,11 +13,16 @@ var DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
 
 var STACK_ICON_SUFFIX = {
   firebase: 'firebase/firebase-plain.svg',
-  kotlin: 'kotlin/kotlin-original.svg'
+  kotlin: 'kotlin/kotlin-original.svg',
+  postgres: 'postgresql/postgresql-original.svg',
+  postgresql: 'postgresql/postgresql-original.svg'
 };
 
 function stackIconUrl(name) {
   var n = String(name || '').toLowerCase();
+  if (n === 'railway') {
+    return 'https://cdn.simpleicons.org/railway/ffffff';
+  }
   if (STACK_ICON_SUFFIX[n]) {
     return DEVICON + '/' + STACK_ICON_SUFFIX[n];
   }
@@ -121,7 +126,11 @@ function CaseStudyPage() {
   var screens = project.screens || [];
   var highlights = project.highlights || [];
   var results = project.results || [];
+  var isWebsite = Array.isArray(project.tags) && project.tags.some(function(t) {
+    return String(t || '').toLowerCase() === 'website';
+  });
   var external = project.linkUrl && project.linkUrl !== '#' && project.linkUrl !== '';
+  var heroScreen = isWebsite && screens.length ? screens[0] : '';
 
   return React.createElement('div', { className: 'case-study-page' },
     React.createElement(SharedHeader, null),
@@ -205,8 +214,44 @@ function CaseStudyPage() {
               IconExternal()
             )
             : null
+          ,
+          heroScreen
+            ? React.createElement('div', { className: 'case-study-hero-visual' },
+                React.createElement('div', { className: 'case-study-mac' },
+                  React.createElement('div', { className: 'case-study-mac-top' },
+                    React.createElement('span', { className: 'case-study-mac-dot case-study-mac-dot--red' }),
+                    React.createElement('span', { className: 'case-study-mac-dot case-study-mac-dot--yellow' }),
+                    React.createElement('span', { className: 'case-study-mac-dot case-study-mac-dot--green' })
+                  ),
+                  React.createElement('div', { className: 'case-study-mac-screen' },
+                    React.createElement('img', { src: heroScreen, alt: title + ' website', loading: 'lazy', decoding: 'async' })
+                  ),
+                  React.createElement('div', { className: 'case-study-mac-stand', 'aria-hidden': true }),
+                  React.createElement('div', { className: 'case-study-mac-base', 'aria-hidden': true })
+                )
+              )
+            : null
         )
       ),
+
+      project.performanceImageUrl
+        ? React.createElement('section', { className: 'case-study-section case-study-performance' },
+            React.createElement('div', { className: 'case-study-section-inner' },
+              React.createElement('h2', { className: 'case-study-h2' }, 'Performance'),
+              React.createElement('p', { className: 'case-study-gallery-lead' },
+                'A quick snapshot of real-world performance signals and Core Web Vitals from the shipped site.'
+              ),
+              React.createElement('figure', { className: 'case-study-perf' },
+                React.createElement('div', { className: 'case-study-perf-frame' },
+                  React.createElement('img', { src: project.performanceImageUrl, alt: title + ' performance report', loading: 'lazy', decoding: 'async' })
+                ),
+                project.performanceCaption
+                  ? React.createElement('figcaption', { className: 'case-study-shot-cap' }, project.performanceCaption)
+                  : null
+              )
+            )
+          )
+        : null,
 
       highlights.length > 0
         ? React.createElement('section', { className: 'case-study-section case-study-highlights' },
@@ -266,7 +311,7 @@ function CaseStudyPage() {
           )
         : null,
 
-      screens.length > 0
+      screens.length > 0 && !isWebsite
         ? React.createElement('section', { className: 'case-study-section case-study-gallery' },
             React.createElement('div', { className: 'case-study-section-inner' },
               React.createElement('h2', { className: 'case-study-h2' }, 'Product screens'),

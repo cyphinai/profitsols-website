@@ -72,6 +72,16 @@ function ScrollHomeMoreSections() {
   ];
 
   var activeItem = items.length ? items[activeIndex] : null;
+  var isWebsite = !!(activeItem && Array.isArray(activeItem.tags) && activeItem.tags.some(function(t) {
+    return String(t || '').toLowerCase() === 'website';
+  }));
+  var previewSrc = (function() {
+    if (!activeItem) return '';
+    var sc = activeItem.screens;
+    if (!sc || sc.length === 0) return '';
+    // For websites, prefer the first (mac/monitor) image; otherwise keep phone-like preview.
+    return isWebsite ? (sc[0] || '') : (sc[1] || sc[0] || '');
+  })();
 
   return React.createElement('div', { className: 'scroll-home-extra' },
     React.createElement('section', { className: 'sh-more sh-more--platforms sh-reveal', id: 'platforms' },
@@ -163,15 +173,26 @@ function ScrollHomeMoreSections() {
               )
             ),
             React.createElement('div', { className: 'sh-more__case-visual' },
-              React.createElement('div', { className: 'sh-more__case-phone' },
-                (function() {
-                  var sc = activeItem.screens;
-                  var src = sc && (sc[1] || sc[0]);
-                  return src
-                    ? React.createElement('img', { src: src, alt: '', className: 'sh-more__case-screen', loading: 'lazy', decoding: 'async', width: 900, height: 1600 })
-                    : React.createElement('div', { className: 'sh-more__case-placeholder' }, 'Preview');
-                })()
-              )
+              isWebsite
+                ? React.createElement('div', { className: 'sh-more__case-mac' },
+                    React.createElement('div', { className: 'sh-more__case-mac-top' },
+                      React.createElement('span', { className: 'sh-more__case-mac-dot sh-more__case-mac-dot--red' }),
+                      React.createElement('span', { className: 'sh-more__case-mac-dot sh-more__case-mac-dot--yellow' }),
+                      React.createElement('span', { className: 'sh-more__case-mac-dot sh-more__case-mac-dot--green' })
+                    ),
+                    React.createElement('div', { className: 'sh-more__case-mac-screen' },
+                      previewSrc
+                        ? React.createElement('img', { src: previewSrc, alt: '', className: 'sh-more__case-mac-img', loading: 'lazy', decoding: 'async' })
+                        : React.createElement('div', { className: 'sh-more__case-placeholder' }, 'Preview')
+                    ),
+                    React.createElement('div', { className: 'sh-more__case-mac-stand', 'aria-hidden': true }),
+                    React.createElement('div', { className: 'sh-more__case-mac-base', 'aria-hidden': true })
+                  )
+                : React.createElement('div', { className: 'sh-more__case-phone' },
+                    previewSrc
+                      ? React.createElement('img', { src: previewSrc, alt: '', className: 'sh-more__case-screen', loading: 'lazy', decoding: 'async', width: 900, height: 1600 })
+                      : React.createElement('div', { className: 'sh-more__case-placeholder' }, 'Preview')
+                  )
             )
           ),
           React.createElement('button', { type: 'button', className: 'sh-more__case-nav', 'aria-label': 'Next', onClick: goNext },
