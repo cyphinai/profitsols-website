@@ -64,9 +64,9 @@ function initScrollHomeGsap(root) {
       if (android) {
         gsap.fromTo(
           android,
-          { x: -110, opacity: 0 },
+          { y: 24, opacity: 0 },
           {
-            x: 0,
+            y: 0,
             opacity: 1,
             ease: 'none',
             scrollTrigger: {
@@ -82,15 +82,34 @@ function initScrollHomeGsap(root) {
       if (ios) {
         gsap.fromTo(
           ios,
-          { x: 110, opacity: 0 },
+          { y: 24, opacity: 0 },
           {
-            x: 0,
+            y: 0,
             opacity: 1,
             ease: 'none',
             scrollTrigger: {
               trigger: mobilePanel,
-              start: 'top 72%',
-              end: 'top 36%',
+              start: 'top 70%',
+              end: 'top 34%',
+              scrub: 1
+            }
+          }
+        );
+      }
+
+      var flutter = mobilePanel.querySelector('.js-flutter');
+      if (flutter) {
+        gsap.fromTo(
+          flutter,
+          { y: 24, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: mobilePanel,
+              start: 'top 68%',
+              end: 'top 32%',
               scrub: 1
             }
           }

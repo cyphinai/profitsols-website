@@ -5,6 +5,7 @@ var SharedHeader = require('../../components/SharedHeader');
 var CyberFooter = require('../../components/CyberFooter');
 var RevealSection = require('../../components/RevealSection');
 var CyberDecor = require('../../components/CyberDecor');
+var MotionHero = require('../../components/motion').MotionHero;
 require('../../styles/cyber-inner-page.css');
 require('./ContactPage.css');
 
@@ -68,10 +69,12 @@ function ContactPage() {
         React.createElement(CyberDecor.DecoFloatingOrbs, null),
         React.createElement(CyberDecor.DecoHeroVectors, null),
         React.createElement('div', { className: 'cyber-inner-hero-inner' },
-          React.createElement('p', { className: 'cyber-inner-eyebrow' }, 'Get in touch'),
-          React.createElement('h1', { className: 'cyber-inner-title' }, 'Let’s build your next product'),
-          React.createElement('p', { className: 'cyber-inner-lead' },
-            'Tell us about your goals, timeline, and tech preferences. We respond quickly with a clear next step — usually the same business day.'
+          React.createElement(MotionHero, null,
+            React.createElement('p', { className: 'cyber-inner-eyebrow' }, 'Get in touch'),
+            React.createElement('h1', { className: 'cyber-inner-title' }, 'Let’s build your next product'),
+            React.createElement('p', { className: 'cyber-inner-lead' },
+              'Tell us about your goals, timeline, and tech preferences. We respond quickly with a clear next step — usually the same business day.'
+            )
           )
         )
       ),

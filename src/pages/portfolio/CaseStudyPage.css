@@ -66,16 +66,52 @@
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  font-weight: 700;
-  color: rgba(0, 203, 240, 0.95) !important;
+  font-weight: 650;
+  color: #ffffff !important;
   text-decoration: none;
   margin-bottom: 28px;
-  transition: gap 0.25s ease, color 0.2s ease;
+  padding: 10px 18px 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    gap 0.25s ease,
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.case-study-back .case-study-icon {
+  color: rgba(255, 255, 255, 0.92);
+  transition: transform 0.22s ease, color 0.22s ease;
 }
 
 .case-study-back:hover {
-  gap: 12px;
-  color: #fff !important;
+  gap: 11px;
+  color: #ffffff !important;
+  background: rgba(0, 203, 240, 0.18);
+  border-color: rgba(0, 203, 240, 0.45);
+  box-shadow:
+    0 10px 28px rgba(0, 203, 240, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transform: translateX(-2px);
+}
+
+.case-study-back:hover .case-study-icon {
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
+.case-study-back:focus-visible {
+  outline: 2px solid rgba(0, 203, 240, 0.65);
+  outline-offset: 3px;
 }
 
 .case-study-hero-head {
@@ -126,6 +162,7 @@
   letter-spacing: -0.04em;
   line-height: 1.08;
   margin: 0 0 16px;
+  color: #ffffff;
 }
 
 .case-study-summary {
@@ -642,9 +679,29 @@
   font-weight: 700;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(0, 203, 240, 0.1);
-  color: var(--cyber-cyan, #00cbf0);
-  border: 1px solid rgba(0, 203, 240, 0.2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(0, 203, 240, 0.2);
+  color: #e8fbff;
+  border: 1px solid rgba(0, 203, 240, 0.45);
+}
+
+.case-study-tag:nth-child(3n+1) {
+  background: rgba(0, 203, 240, 0.18);
+  color: #dffaff;
+  border-color: rgba(0, 203, 240, 0.5);
+}
+
+.case-study-tag:nth-child(3n+2) {
+  background: rgba(212, 173, 57, 0.2);
+  color: #fff3c8;
+  border-color: rgba(212, 173, 57, 0.5);
+}
+
+.case-study-tag:nth-child(3n) {
+  background: rgba(238, 44, 101, 0.2);
+  color: #ffd6e4;
+  border-color: rgba(238, 44, 101, 0.48);
 }
 
 /* CTA */

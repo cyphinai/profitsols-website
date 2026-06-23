@@ -1,45 +1,16 @@
 'use strict';
 
 var React = require('react');
-var useEffect = React.useEffect;
-var useRef = React.useRef;
+var MotionReveal = require('./motion').MotionReveal;
 
 /**
- * Adds .cyber-reveal--visible when the section enters the viewport.
+ * Scroll-reveal section powered by Framer Motion.
  */
 function RevealSection(props) {
-  var ref = useRef(null);
-  var Tag = props.as || 'section';
-  var className = (props.className || '').trim();
-  var children = props.children;
-
-  useEffect(function() {
-    var node = ref.current;
-    if (!node) return undefined;
-
-    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      node.classList.add('cyber-reveal--visible');
-      return undefined;
-    }
-
-    var obs = new IntersectionObserver(
-      function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('cyber-reveal--visible');
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.07, rootMargin: '0px 0px -5% 0px' }
-    );
-    obs.observe(node);
-    return function() {
-      obs.disconnect();
-    };
-  }, []);
-
-  return React.createElement(Tag, { ref: ref, className: (className + ' cyber-reveal').trim() }, children);
+  return React.createElement(MotionReveal, {
+    as: props.as || 'section',
+    className: props.className
+  }, props.children);
 }
 
 module.exports = RevealSection;

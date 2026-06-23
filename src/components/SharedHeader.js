@@ -2,15 +2,19 @@
 
 var React = require('react');
 var useState = React.useState;
+var useRef = React.useRef;
+var useEffect = React.useEffect;
 var Link = require('react-router-dom').Link;
 var useLocation = require('react-router-dom').useLocation;
+var motion = require('./motion').motion;
+var prefersReducedMotion = require('./motion').prefersReducedMotion;
 require('./SharedHeader.css');
 
 var SERVICES = [
-  { label: 'Mobile App Development', path: '/mobile-app-development' },
-  { label: 'Website Development', path: '/website-development' },
-  { label: 'UI/UX Development', path: '/ui-ux-development' },
-  { label: 'Web App Development', path: '/web-app-development' }
+  { label: 'Mobile App Development', path: '/mobile-app-development', desc: 'Native & cross-platform', icon: 'mobile' },
+  { label: 'Website Development', path: '/website-development', desc: 'Fast, SEO-ready sites', icon: 'website' },
+  { label: 'UI/UX Development', path: '/ui-ux-development', desc: 'Design that converts', icon: 'design' },
+  { label: 'Web App Development', path: '/web-app-development', desc: 'Scalable SaaS & tools', icon: 'webapp' }
 ];
 
 /** Brand P mark (matches public/logo-p-gold.svg): rounded path, aurora gradient mint → violet → magenta → coral */
@@ -76,6 +80,49 @@ function IconChevronDown() {
   );
 }
 
+function ServiceIcon(props) {
+  var name = props.name;
+  var common = {
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '1.65',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    className: 'nav-dropdown-item__icon-svg',
+    'aria-hidden': true
+  };
+
+  if (name === 'mobile') {
+    return React.createElement('svg', common,
+      React.createElement('rect', { x: '6.5', y: '2.5', width: '11', height: '19', rx: '2.5' }),
+      React.createElement('line', { x1: '12', y1: '17.5', x2: '12.01', y2: '17.5' }),
+      React.createElement('rect', { x: '9', y: '5.5', width: '6', height: '8', rx: '1', fill: 'currentColor', stroke: 'none', opacity: '0.35' })
+    );
+  }
+  if (name === 'website') {
+    return React.createElement('svg', common,
+      React.createElement('rect', { x: '3', y: '4', width: '18', height: '16', rx: '2' }),
+      React.createElement('line', { x1: '3', y1: '8.5', x2: '21', y2: '8.5' }),
+      React.createElement('circle', { cx: '6.5', cy: '6.25', r: '0.75', fill: 'currentColor', stroke: 'none' }),
+      React.createElement('circle', { cx: '9', cy: '6.25', r: '0.75', fill: 'currentColor', stroke: 'none' }),
+      React.createElement('path', { d: 'M7 13h4M7 16h7' })
+    );
+  }
+  if (name === 'design') {
+    return React.createElement('svg', common,
+      React.createElement('path', { d: 'M12 3.5l1.6 3.3 3.6.5-2.6 2.5.6 3.6L12 11.8 8.8 13.4l.6-3.6L6.8 7.3l3.6-.5z' }),
+      React.createElement('path', { d: 'M5 19.5c2.2-1.2 4.5-1.8 7-1.8s4.8.6 7 1.8' })
+    );
+  }
+  return React.createElement('svg', common,
+    React.createElement('rect', { x: '2.5', y: '5', width: '19', height: '14', rx: '2' }),
+    React.createElement('path', { d: 'M8 10l-2.5 2.5L8 15' }),
+    React.createElement('path', { d: 'M16 10l2.5 2.5L16 15' }),
+    React.createElement('line', { x1: '13', y1: '9', x2: '11', y2: '16' })
+  );
+}
+
 function SharedHeader() {
   var location = useLocation();
   var path = location.pathname || '';
@@ -90,13 +137,61 @@ function SharedHeader() {
   var _useState2 = useState(false);
   var servicesOpen = _useState2[0];
   var setServicesOpen = _useState2[1];
+  var closeTimerRef = useRef(null);
+
+  useEffect(function() {
+    return function() {
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+      }
+    };
+  }, []);
 
   var closeAll = function() {
     setMenuOpen(false);
     setServicesOpen(false);
   };
 
-  return React.createElement('header', { className: 'header header--cyber' },
+  var openServices = function() {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setServicesOpen(true);
+  };
+
+  var scheduleCloseServices = function() {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+    }
+    closeTimerRef.current = setTimeout(function() {
+      setServicesOpen(false);
+      closeTimerRef.current = null;
+    }, 180);
+  };
+
+  var handleServicesEnter = function() {
+    if (window.matchMedia('(min-width: 769px)').matches) {
+      openServices();
+    }
+  };
+
+  var handleServicesLeave = function() {
+    if (window.matchMedia('(min-width: 769px)').matches) {
+      scheduleCloseServices();
+    }
+  };
+
+  var toggleServices = function() {
+    setServicesOpen(!servicesOpen);
+  };
+
+  return React.createElement(motion.header, {
+    className: 'header header--cyber',
+    initial: prefersReducedMotion() ? false : { y: -20, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] }
+  },
     React.createElement('div', { className: 'header-bg' }),
     React.createElement('div', { className: 'header-accent' }),
     React.createElement('div', { className: 'header-inner header-inner--cyber' },
@@ -110,7 +205,12 @@ function SharedHeader() {
         React.createElement(
           'span',
           { className: 'logo-lockup' },
-          React.createElement(LogoMarkNav, null),
+          React.createElement(
+            'span',
+            { className: 'logo-lockup__mark-wrap', 'aria-hidden': true },
+            React.createElement(LogoMarkNav, null)
+          ),
+          React.createElement('span', { className: 'logo-lockup__divider', 'aria-hidden': true }),
           React.createElement(
             'span',
             { className: 'logo-lockup__type' },
@@ -137,30 +237,49 @@ function SharedHeader() {
       React.createElement('nav', { className: 'nav nav--cyber' + (menuOpen ? ' nav-open' : '') },
         React.createElement('div', {
           className: 'nav-dropdown' + (servicesOpen ? ' open' : ''),
-          onMouseEnter: function() { setServicesOpen(true); },
-          onMouseLeave: function() { setServicesOpen(false); }
+          onMouseEnter: handleServicesEnter,
+          onMouseLeave: handleServicesLeave
         },
           React.createElement('button', {
             type: 'button',
             className: 'nav-dropdown-trigger nav-link nav-link--cyber' + (onServicePage ? ' nav-link--active' : ''),
             'aria-expanded': servicesOpen,
             'aria-haspopup': 'true',
-            onClick: function() { setServicesOpen(!servicesOpen); }
+            onClick: toggleServices
           },
             servicesLabel,
             React.createElement(IconChevronDown, null)
           ),
-          React.createElement('div', { className: 'nav-dropdown-menu' + (servicesOpen ? ' open' : '') },
-            SERVICES.map(function(s, i) {
-              var active = path === s.path;
-              return React.createElement(Link, {
-                key: i,
-                to: s.path,
-                className: 'nav-dropdown-item nav-dropdown-item--cyber' + (active ? ' nav-dropdown-item--active' : ''),
-                onClick: closeAll,
-                'aria-current': active ? 'page' : undefined
-              }, s.label);
-            })
+          React.createElement('div', {
+            className: 'nav-dropdown-menu' + (servicesOpen ? ' open' : ''),
+            onMouseEnter: handleServicesEnter,
+            onMouseLeave: handleServicesLeave
+          },
+            React.createElement('div', { className: 'nav-dropdown-menu__header' },
+              React.createElement('span', { className: 'nav-dropdown-menu__eyebrow' }, 'What we build'),
+              React.createElement('span', { className: 'nav-dropdown-menu__title' }, 'Our Services')
+            ),
+            React.createElement('div', { className: 'nav-dropdown-menu__list' },
+              SERVICES.map(function(s, i) {
+                var active = path === s.path;
+                return React.createElement(Link, {
+                  key: i,
+                  to: s.path,
+                  className: 'nav-dropdown-item nav-dropdown-item--cyber' + (active ? ' nav-dropdown-item--active' : ''),
+                  onClick: closeAll,
+                  'aria-current': active ? 'page' : undefined
+                },
+                  React.createElement('span', { className: 'nav-dropdown-item__icon nav-dropdown-item__icon--' + s.icon },
+                    React.createElement(ServiceIcon, { name: s.icon })
+                  ),
+                  React.createElement('span', { className: 'nav-dropdown-item__text' },
+                    React.createElement('span', { className: 'nav-dropdown-item__label' }, s.label),
+                    React.createElement('span', { className: 'nav-dropdown-item__desc' }, s.desc)
+                  ),
+                  React.createElement('span', { className: 'nav-dropdown-item__arrow', 'aria-hidden': true }, '→')
+                );
+              })
+            )
           )
         ),
         React.createElement(Link, {

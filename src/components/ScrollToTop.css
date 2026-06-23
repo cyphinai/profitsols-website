@@ -1,0 +1,107 @@
+.scroll-to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(20px, 4vw, 32px);
+  z-index: 900;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid rgba(0, 203, 240, 0.35);
+  border-radius: 16px;
+  background: rgba(9, 16, 28, 0.88);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow:
+    0 12px 32px rgba(2, 8, 18, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.92);
+  transition:
+    opacity 0.28s ease,
+    visibility 0.28s ease,
+    transform 0.28s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.scroll-to-top--visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-to-top__icon {
+  width: 20px;
+  height: 20px;
+  color: rgba(0, 203, 240, 0.95);
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+
+.scroll-to-top__label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.scroll-to-top:hover {
+  background: rgba(0, 203, 240, 0.16);
+  border-color: rgba(0, 203, 240, 0.55);
+  box-shadow:
+    0 16px 40px rgba(0, 203, 240, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.scroll-to-top:hover .scroll-to-top__icon {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.scroll-to-top:focus-visible {
+  outline: 2px solid rgba(0, 203, 240, 0.65);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .scroll-to-top__icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .scroll-to-top__label {
+    font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-to-top {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .scroll-to-top--visible {
+    transform: none;
+  }
+
+  .scroll-to-top:hover .scroll-to-top__icon {
+    transform: none;
+  }
+}

@@ -246,20 +246,20 @@
 }
 
 .svc-option-card.active {
-  border-color: rgba(0, 203, 240, 0.45);
+  border-color: transparent;
   background: linear-gradient(135deg, rgba(0, 64, 127, 0.55), rgba(0, 203, 240, 0.12));
   box-shadow: 0 12px 40px rgba(0, 203, 240, 0.12);
 }
 
 .service-page.accent-pink .svc-option-card.active {
   background: linear-gradient(135deg, rgba(238, 44, 101, 0.35), rgba(238, 44, 101, 0.08));
-  border-color: rgba(238, 44, 101, 0.45);
+  border-color: transparent;
   box-shadow: 0 12px 40px rgba(238, 44, 101, 0.12);
 }
 
 .service-page.accent-gold .svc-option-card.active {
   background: linear-gradient(135deg, rgba(212, 173, 57, 0.35), rgba(212, 173, 57, 0.08));
-  border-color: rgba(212, 173, 57, 0.45);
+  border-color: transparent;
   box-shadow: 0 12px 40px rgba(212, 173, 57, 0.1);
 }
 
@@ -276,10 +276,17 @@
   width: 48px;
   height: 48px;
   object-fit: contain;
+  transition: transform 0.25s ease;
 }
 
-.svc-option-card.active .service-option-icon-img {
-  filter: brightness(0) invert(1);
+.svc-option-icon .service-option-icon-svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.svc-option-card.active .service-option-icon-img,
+.svc-option-card.active .service-option-icon-svg {
+  transform: scale(1.06);
 }
 
 .svc-option-text {
@@ -332,25 +339,8 @@
   border-radius: 18px;
   background: rgba(12, 18, 32, 0.85);
   border: 1px solid rgba(0, 203, 240, 0.12);
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    border-color 0.25s ease;
+  transition: border-color 0.25s ease;
 }
-
-.cyber-reveal--visible .svc-process-step {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.cyber-reveal--visible .svc-process-step:nth-child(1) { transition-delay: 0.05s; }
-.cyber-reveal--visible .svc-process-step:nth-child(2) { transition-delay: 0.1s; }
-.cyber-reveal--visible .svc-process-step:nth-child(3) { transition-delay: 0.15s; }
-.cyber-reveal--visible .svc-process-step:nth-child(4) { transition-delay: 0.2s; }
-.cyber-reveal--visible .svc-process-step:nth-child(5) { transition-delay: 0.25s; }
-.cyber-reveal--visible .svc-process-step:nth-child(6) { transition-delay: 0.3s; }
 
 .svc-process-step:hover {
   border-color: rgba(0, 203, 240, 0.28);
@@ -752,28 +742,11 @@
   border-radius: 20px;
   background: rgba(12, 18, 32, 0.85);
   border: 1px solid rgba(0, 203, 240, 0.12);
-  transition: border-color 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: translateY(18px);
+  transition: border-color 0.3s ease;
 }
-
-.cyber-reveal--visible .company-value-card {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity 0.55s ease,
-    transform 0.55s ease,
-    border-color 0.3s ease;
-}
-
-.cyber-reveal--visible .company-value-card:nth-child(1) { transition-delay: 0.05s; }
-.cyber-reveal--visible .company-value-card:nth-child(2) { transition-delay: 0.1s; }
-.cyber-reveal--visible .company-value-card:nth-child(3) { transition-delay: 0.15s; }
-.cyber-reveal--visible .company-value-card:nth-child(4) { transition-delay: 0.2s; }
 
 .company-value-card:hover {
   border-color: rgba(238, 44, 101, 0.35);
-  transform: translateY(-4px);
 }
 
 .company-value-icon {
@@ -785,17 +758,17 @@
   border: 1px solid rgba(0, 203, 240, 0.25);
 }
 
-.company-value-card:nth-child(2) .company-value-icon {
+.company-values-grid > *:nth-child(2) .company-value-icon {
   background: linear-gradient(135deg, rgba(238, 44, 101, 0.2), rgba(238, 44, 101, 0.05));
   border-color: rgba(238, 44, 101, 0.25);
 }
 
-.company-value-card:nth-child(3) .company-value-icon {
+.company-values-grid > *:nth-child(3) .company-value-icon {
   background: linear-gradient(135deg, rgba(212, 173, 57, 0.25), rgba(212, 173, 57, 0.06));
   border-color: rgba(212, 173, 57, 0.3);
 }
 
-.company-value-card:nth-child(4) .company-value-icon {
+.company-values-grid > *:nth-child(4) .company-value-icon {
   background: linear-gradient(135deg, rgba(0, 64, 127, 0.4), rgba(0, 203, 240, 0.08));
   border-color: rgba(0, 64, 127, 0.35);
 }

@@ -8,6 +8,10 @@ var SharedHeader = require('../components/SharedHeader');
 var CyberFooter = require('../components/CyberFooter');
 var RevealSection = require('../components/RevealSection');
 var CyberDecor = require('../components/CyberDecor');
+var MotionHero = require('../components/motion').MotionHero;
+var MotionStagger = require('../components/motion').MotionStagger;
+var MotionItem = require('../components/motion').MotionItem;
+var MotionHover = require('../components/motion').MotionHover;
 require('../styles/cyber-inner-page.css');
 
 var DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
@@ -89,9 +93,11 @@ function ServicePage(props) {
         React.createElement('div', { className: 'cyber-inner-hero-grid', 'aria-hidden': true }),
         React.createElement(CyberDecor.DecoHeroVectors, null),
         React.createElement('div', { className: 'cyber-inner-hero-inner' },
-          React.createElement('p', { className: 'cyber-inner-eyebrow' }, heroEyebrow),
-          React.createElement('h1', { className: 'cyber-inner-title' }, heroTitle),
-          React.createElement('p', { className: 'cyber-inner-lead' }, heroDesc)
+          React.createElement(MotionHero, null,
+            React.createElement('p', { className: 'cyber-inner-eyebrow' }, heroEyebrow),
+            React.createElement('h1', { className: 'cyber-inner-title' }, heroTitle),
+            React.createElement('p', { className: 'cyber-inner-lead' }, heroDesc)
+          )
         )
       ),
 
@@ -129,11 +135,11 @@ function ServicePage(props) {
 
       processSteps.length > 0 && React.createElement(RevealSection, { className: 'cyber-inner-section-wrap svc-process' },
         React.createElement('h2', { className: 'cyber-inner-section-title' }, processTitle),
-        React.createElement('div', { className: 'svc-process-grid' },
+        React.createElement(MotionStagger, { className: 'svc-process-grid', stagger: 0.07 },
           processSteps.map(function(step, i) {
             var n = i + 1;
             var num = n < 10 ? '0' + n : String(n);
-            return React.createElement('div', { key: i, className: 'svc-process-step' },
+            return React.createElement(MotionItem, { key: i, className: 'svc-process-step' },
               React.createElement('div', { className: 'svc-process-num' }, num),
               React.createElement('h3', { className: 'svc-process-title' }, step.title),
               React.createElement('p', { className: 'svc-process-desc' }, step.desc)
@@ -144,10 +150,10 @@ function ServicePage(props) {
 
       techIcons.length > 0 && React.createElement(RevealSection, { className: 'cyber-inner-section-wrap svc-tech' },
         React.createElement('h2', { className: 'cyber-inner-section-title' }, techTitle),
-        React.createElement('div', { className: 'svc-tech-icons' },
+        React.createElement(MotionStagger, { className: 'svc-tech-icons', stagger: 0.05 },
           techIcons.map(function(item, i) {
             var name = typeof item === 'string' ? item : item.name;
-            return renderTechIcon(name, i);
+            return React.createElement(MotionItem, { key: i }, renderTechIcon(name, i));
           })
         )
       ),

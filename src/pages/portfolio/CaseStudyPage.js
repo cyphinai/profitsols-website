@@ -6,6 +6,8 @@ var useParams = require('react-router-dom').useParams;
 var Navigate = require('react-router-dom').Navigate;
 var SharedHeader = require('../../components/SharedHeader');
 var CyberFooter = require('../../components/CyberFooter');
+var RevealSection = require('../../components/RevealSection');
+var MotionHero = require('../../components/motion').MotionHero;
 var getPortfolioBySlug = require('../../utils/portfolioHelpers').getPortfolioBySlug;
 require('./CaseStudyPage.css');
 
@@ -138,7 +140,7 @@ function CaseStudyPage() {
       React.createElement('section', { className: 'case-study-hero' },
         React.createElement('div', { className: 'case-study-hero-grid', 'aria-hidden': true }),
         DecoHeroVectors(),
-        React.createElement('div', { className: 'case-study-hero-inner' },
+        React.createElement(MotionHero, { className: 'case-study-hero-inner' },
           React.createElement(Link, { to: '/portfolio', className: 'case-study-back' },
             IconArrowLeft(),
             'Portfolio'
@@ -235,7 +237,7 @@ function CaseStudyPage() {
       ),
 
       project.performanceImageUrl
-        ? React.createElement('section', { className: 'case-study-section case-study-performance' },
+        ? React.createElement(RevealSection, { className: 'case-study-section case-study-performance' },
             React.createElement('div', { className: 'case-study-section-inner' },
               React.createElement('h2', { className: 'case-study-h2' }, 'Performance'),
               React.createElement('p', { className: 'case-study-gallery-lead' },
@@ -254,7 +256,7 @@ function CaseStudyPage() {
         : null,
 
       highlights.length > 0
-        ? React.createElement('section', { className: 'case-study-section case-study-highlights' },
+        ? React.createElement(RevealSection, { className: 'case-study-section case-study-highlights' },
             React.createElement('div', { className: 'case-study-section-inner' },
               DecoSectionAccent(),
               React.createElement('h2', { className: 'case-study-h2' }, 'Highlights'),
@@ -272,7 +274,7 @@ function CaseStudyPage() {
           )
         : null,
 
-      React.createElement('section', { className: 'case-study-section case-study-split' },
+      React.createElement(RevealSection, { className: 'case-study-section case-study-split' },
         React.createElement('div', { className: 'case-study-section-inner case-study-split-inner' },
           project.challenge
             ? React.createElement('article', { className: 'case-study-prose-card case-study-prose-card--challenge' },
@@ -296,7 +298,7 @@ function CaseStudyPage() {
       ),
 
       results.length > 0
-        ? React.createElement('section', { className: 'case-study-section case-study-results' },
+        ? React.createElement(RevealSection, { className: 'case-study-section case-study-results' },
             React.createElement('div', { className: 'case-study-section-inner' },
               React.createElement('h2', { className: 'case-study-h2' }, 'Outcomes'),
               React.createElement('ul', { className: 'case-study-results-list' },
@@ -312,7 +314,7 @@ function CaseStudyPage() {
         : null,
 
       screens.length > 0 && !isWebsite
-        ? React.createElement('section', { className: 'case-study-section case-study-gallery' },
+        ? React.createElement(RevealSection, { className: 'case-study-section case-study-gallery' },
             React.createElement('div', { className: 'case-study-section-inner' },
               React.createElement('h2', { className: 'case-study-h2' }, 'Product screens'),
               React.createElement('p', { className: 'case-study-gallery-lead' },
@@ -333,7 +335,7 @@ function CaseStudyPage() {
         : null,
 
       (project.tags || []).length > 0
-        ? React.createElement('section', { className: 'case-study-section case-study-tags-bar' },
+        ? React.createElement(RevealSection, { className: 'case-study-section case-study-tags-bar' },
             React.createElement('div', { className: 'case-study-section-inner case-study-tags-inner' },
               React.createElement('span', { className: 'case-study-tags-label' }, 'Tags'),
               React.createElement('div', { className: 'case-study-tags' },
@@ -345,7 +347,7 @@ function CaseStudyPage() {
           )
         : null,
 
-      React.createElement('section', { className: 'case-study-cta' },
+      React.createElement(RevealSection, { className: 'case-study-cta' },
         React.createElement('div', { className: 'case-study-cta-inner' },
           React.createElement('h2', { className: 'case-study-cta-title' }, 'Like what you see?'),
           React.createElement('p', { className: 'case-study-cta-desc' },

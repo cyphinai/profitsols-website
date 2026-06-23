@@ -6,6 +6,10 @@ var SharedHeader = require('../../components/SharedHeader');
 var CyberFooter = require('../../components/CyberFooter');
 var RevealSection = require('../../components/RevealSection');
 var CyberDecor = require('../../components/CyberDecor');
+var MotionHero = require('../../components/motion').MotionHero;
+var MotionStagger = require('../../components/motion').MotionStagger;
+var MotionItem = require('../../components/motion').MotionItem;
+var MotionHover = require('../../components/motion').MotionHover;
 require('../../styles/cyber-inner-page.css');
 
 function CompanyPage() {
@@ -24,23 +28,25 @@ function CompanyPage() {
         React.createElement(CyberDecor.DecoFloatingOrbs, null),
         React.createElement(CyberDecor.DecoHeroVectors, null),
         React.createElement('div', { className: 'cyber-inner-hero-inner' },
-          React.createElement('p', { className: 'cyber-inner-eyebrow' }, 'About ProfitSols'),
-          React.createElement('h1', { className: 'cyber-inner-title' }, 'Software development company in Islamabad'),
-          React.createElement('p', { className: 'cyber-inner-lead' },
-            'ProfitSols is a leading software development company in Islamabad, Pakistan. Our core motive is to provide a one-stop solution for mobile apps, websites, web applications, and UI/UX — with a focus on measurable outcomes for businesses worldwide.'
-          ),
-          React.createElement('div', { className: 'company-stats-row' },
-            React.createElement('div', { className: 'company-stat-card' },
-              React.createElement('span', { className: 'company-stat-card__num' }, '100+'),
-              React.createElement('span', { className: 'company-stat-card__label' }, 'Clients served')
+          React.createElement(MotionHero, null,
+            React.createElement('p', { className: 'cyber-inner-eyebrow' }, 'About ProfitSols'),
+            React.createElement('h1', { className: 'cyber-inner-title' }, 'Software development company in Islamabad'),
+            React.createElement('p', { className: 'cyber-inner-lead' },
+              'ProfitSols is a leading software development company in Islamabad, Pakistan. Our core motive is to provide a one-stop solution for mobile apps, websites, web applications, and UI/UX — with a focus on measurable outcomes for businesses worldwide.'
             ),
-            React.createElement('div', { className: 'company-stat-card' },
-              React.createElement('span', { className: 'company-stat-card__num' }, '24/7'),
-              React.createElement('span', { className: 'company-stat-card__label' }, 'Support mindset')
-            ),
-            React.createElement('div', { className: 'company-stat-card' },
-              React.createElement('span', { className: 'company-stat-card__num' }, 'End-to-end'),
-              React.createElement('span', { className: 'company-stat-card__label' }, 'Product delivery')
+            React.createElement(MotionStagger, { className: 'company-stats-row', stagger: 0.1 },
+              React.createElement(MotionItem, { className: 'company-stat-card' },
+                React.createElement('span', { className: 'company-stat-card__num' }, '100+'),
+                React.createElement('span', { className: 'company-stat-card__label' }, 'Clients served')
+              ),
+              React.createElement(MotionItem, { className: 'company-stat-card' },
+                React.createElement('span', { className: 'company-stat-card__num' }, '24/7'),
+                React.createElement('span', { className: 'company-stat-card__label' }, 'Support mindset')
+              ),
+              React.createElement(MotionItem, { className: 'company-stat-card' },
+                React.createElement('span', { className: 'company-stat-card__num' }, 'End-to-end'),
+                React.createElement('span', { className: 'company-stat-card__label' }, 'Product delivery')
+              )
             )
           )
         )
@@ -66,15 +72,17 @@ function CompanyPage() {
 
       React.createElement(RevealSection, { className: 'cyber-inner-section-wrap company-values-section' },
         React.createElement('h2', { className: 'cyber-inner-section-title' }, 'How we work'),
-        React.createElement('div', { className: 'company-values-grid' },
+        React.createElement(MotionStagger, { className: 'company-values-grid', stagger: 0.08 },
           values.map(function(v, i) {
             var idx = i + 1;
             var num = idx < 10 ? '0' + idx : String(idx);
-            return React.createElement('div', { key: i, className: 'company-value-card' },
-              React.createElement('div', { className: 'company-value-icon', 'aria-hidden': true }),
-              React.createElement('span', { className: 'company-value-index' }, num),
-              React.createElement('h3', { className: 'company-value-title' }, v.title),
-              React.createElement('p', { className: 'company-value-desc' }, v.desc)
+            return React.createElement(MotionItem, { key: i },
+              React.createElement(MotionHover, { as: 'div', className: 'company-value-card' },
+                React.createElement('div', { className: 'company-value-icon', 'aria-hidden': true }),
+                React.createElement('span', { className: 'company-value-index' }, num),
+                React.createElement('h3', { className: 'company-value-title' }, v.title),
+                React.createElement('p', { className: 'company-value-desc' }, v.desc)
+              )
             );
           })
         ),

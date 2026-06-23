@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Additional homepage sections (platforms, about, portfolio, clients, why-us, news)
+ * Additional homepage sections (platforms, about, portfolio, clients, why-us)
  * Styled to match the scroll homepage dark SaaS theme.
  */
 
@@ -13,6 +13,10 @@ var platformsData = require('../../data/platforms.json');
 var getPortfolioSlug = require('../../utils/portfolioHelpers').getPortfolioSlug;
 var getPlatformLogoUrl = require('../../utils/platformLogos').getPlatformLogoUrl;
 var applyPlatformLogoFallback = require('../../utils/platformLogos').applyPlatformLogoFallback;
+var MotionReveal = require('../../components/motion').MotionReveal;
+var MotionStagger = require('../../components/motion').MotionStagger;
+var MotionItem = require('../../components/motion').MotionItem;
+var MotionHover = require('../../components/motion').MotionHover;
 
 function IconStar() {
   return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', className: 'sh-more-icon' },
@@ -31,13 +35,6 @@ function IconArrowRight() {
   return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', className: 'sh-more-icon sh-more-icon--sm' },
     React.createElement('line', { x1: '5', y1: '12', x2: '19', y2: '12' }),
     React.createElement('polyline', { points: '12 5 19 12 12 19' })
-  );
-}
-
-function IconFileText() {
-  return React.createElement('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', className: 'sh-more-icon sh-more-icon--lg' },
-    React.createElement('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-    React.createElement('polyline', { points: '14 2 14 8 20 8' })
   );
 }
 
@@ -65,12 +62,6 @@ function ScrollHomeMoreSections() {
     { title: 'Free Consultation', desc: 'No-cost discovery to align scope and tech choices.', icon: IconCheck }
   ];
 
-  var news = [
-    { title: 'Mobile frameworks in 2024', desc: 'How teams choose between Flutter, React Native, and native stacks for product velocity.' },
-    { title: 'Web performance essentials', desc: 'Core Web Vitals, caching, and modern bundling for faster user experiences.' },
-    { title: 'Design systems at scale', desc: 'Tokens, components, and handoff practices that keep design and code in sync.' }
-  ];
-
   var activeItem = items.length ? items[activeIndex] : null;
   var isWebsite = !!(activeItem && Array.isArray(activeItem.tags) && activeItem.tags.some(function(t) {
     return String(t || '').toLowerCase() === 'website';
@@ -84,14 +75,15 @@ function ScrollHomeMoreSections() {
   })();
 
   return React.createElement('div', { className: 'scroll-home-extra' },
-    React.createElement('section', { className: 'sh-more sh-more--platforms sh-reveal', id: 'platforms' },
+    React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--platforms', id: 'platforms' },
       React.createElement('p', { className: 'sh-more__eyebrow' }, 'Trusted platforms'),
       React.createElement('h2', { className: 'sh-more__title' }, 'Listed across top industry platforms'),
-      React.createElement('div', { className: 'sh-more__platform-grid' },
+      React.createElement(MotionStagger, { className: 'sh-more__platform-grid', stagger: 0.06 },
         platforms.map(function(p, i) {
           var href = p.website || '#';
-          return React.createElement('a', {
+          return React.createElement(MotionItem, {
             key: p.name + '-' + i,
+            as: 'a',
             className: 'sh-more__platform-card',
             href: href,
             target: '_blank',
@@ -116,7 +108,7 @@ function ScrollHomeMoreSections() {
       )
     ),
 
-    React.createElement('section', { className: 'sh-more sh-more--about sh-reveal', id: 'company' },
+    React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--about', id: 'company' },
       React.createElement('p', { className: 'sh-more__eyebrow' }, 'About us'),
       React.createElement('h2', { className: 'sh-more__title' }, 'Software development company in Islamabad, Pakistan'),
       React.createElement('div', { className: 'sh-more__about-text' },
@@ -133,7 +125,7 @@ function ScrollHomeMoreSections() {
       React.createElement(Link, { to: '/company', className: 'sh-more__link-btn' }, 'Learn more about us', React.createElement(IconArrowRight, null))
     ),
 
-    React.createElement('section', { className: 'sh-more sh-more--portfolio sh-reveal', id: 'portfolio' },
+    React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--portfolio', id: 'portfolio' },
       React.createElement('p', { className: 'sh-more__eyebrow' }, 'Portfolio'),
       React.createElement('h2', { className: 'sh-more__title' }, 'Case studies'),
       items.length === 0
@@ -214,41 +206,28 @@ function ScrollHomeMoreSections() {
       ) : null
     ),
 
-    React.createElement('section', { className: 'sh-more sh-more--clients sh-reveal' },
+    React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--clients' },
       React.createElement('p', { className: 'sh-more__eyebrow' }, 'Partners'),
       React.createElement('h2', { className: 'sh-more__title' }, 'Our clients'),
-      React.createElement('div', { className: 'sh-more__clients-grid' },
+      React.createElement(MotionStagger, { className: 'sh-more__clients-grid', stagger: 0.07 },
         [1, 2, 3, 4, 5].map(function(n) {
-          return React.createElement('div', { key: n, className: 'sh-more__client-card' }, 'Client ' + n);
+          return React.createElement(MotionItem, { key: n, className: 'sh-more__client-card' }, 'Client ' + n);
         })
       )
     ),
 
-    React.createElement('section', { className: 'sh-more sh-more--why sh-reveal' },
+    React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--why' },
       React.createElement('p', { className: 'sh-more__eyebrow' }, 'Why ProfitSols'),
       React.createElement('h2', { className: 'sh-more__title' }, 'Why choose us?'),
-      React.createElement('div', { className: 'sh-more__why-grid' },
+      React.createElement(MotionStagger, { className: 'sh-more__why-grid', stagger: 0.08 },
         whyItems.map(function(item, i) {
           var Icon = item.icon;
-          return React.createElement('div', { key: i, className: 'sh-more__why-card' },
-            React.createElement('div', { className: 'sh-more__why-icon' }, React.createElement(Icon, null)),
-            React.createElement('h3', { className: 'sh-more__why-title' }, item.title),
-            React.createElement('p', { className: 'sh-more__why-desc' }, item.desc)
-          );
-        })
-      )
-    ),
-
-    React.createElement('section', { className: 'sh-more sh-more--news sh-reveal', id: 'news' },
-      React.createElement('p', { className: 'sh-more__eyebrow' }, 'Insights'),
-      React.createElement('h2', { className: 'sh-more__title' }, 'Latest news'),
-      React.createElement('div', { className: 'sh-more__news-grid' },
-        news.map(function(item, i) {
-          return React.createElement('article', { key: i, className: 'sh-more__news-card' },
-            React.createElement('div', { className: 'sh-more__news-visual' }, React.createElement(IconFileText, null)),
-            React.createElement('h3', { className: 'sh-more__news-title' }, item.title),
-            React.createElement('p', { className: 'sh-more__news-desc' }, item.desc),
-            React.createElement('span', { className: 'sh-more__news-fake-link' }, 'Read more', React.createElement(IconArrowRight, null))
+          return React.createElement(MotionItem, { key: i },
+            React.createElement(MotionHover, { as: 'div', className: 'sh-more__why-card' },
+              React.createElement('div', { className: 'sh-more__why-icon' }, React.createElement(Icon, null)),
+              React.createElement('h3', { className: 'sh-more__why-title' }, item.title),
+              React.createElement('p', { className: 'sh-more__why-desc' }, item.desc)
+            )
           );
         })
       )
