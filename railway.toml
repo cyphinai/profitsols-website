@@ -1,0 +1,11 @@
+[build]
+builder = "NIXPACKS"
+# CRA treats webpack warnings as errors when CI=true (Railway sets this by default).
+buildCommand = "CI=false npm run build"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
