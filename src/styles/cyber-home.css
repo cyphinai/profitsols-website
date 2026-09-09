@@ -1,7 +1,7 @@
 /* Home page — cyber theme overrides (loaded after Home.css) */
 
 .home-page {
-  background: transparent;
+  background: var(--cyber-bg-deep, #050a12);
   color: rgba(255, 255, 255, 0.88);
 }
 

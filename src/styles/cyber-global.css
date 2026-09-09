@@ -41,25 +41,8 @@ body {
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative;
-}
-
-/* Large navy P mark watermark (brand-scale, like major site marks) */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url('../assets/logo-p-navy-mark.png');
-  background-repeat: no-repeat;
-  background-position: calc(100% + 5%) 55%;
-  background-size: auto min(135vh, 1600px);
-  opacity: 0.15;
 }
 
 #root {
   min-height: 100vh;
-  position: relative;
-  z-index: 1;
 }
