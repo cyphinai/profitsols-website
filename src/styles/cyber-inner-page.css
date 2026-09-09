@@ -21,7 +21,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--cyber-bg-deep, #050a12);
+  background: transparent;
   color: rgba(255, 255, 255, 0.9);
   font-family: var(--font-body, 'Plus Jakarta Sans', -apple-system, sans-serif);
 }

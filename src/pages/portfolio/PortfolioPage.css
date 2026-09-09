@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--cyber-bg-deep, #050a12);
+  background: transparent;
 }
 
 .portfolio-main {
