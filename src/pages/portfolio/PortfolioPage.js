@@ -45,11 +45,16 @@ function PortfolioPage() {
           ? React.createElement('p', { className: 'portfolio-empty' }, 'No portfolio items yet. Add entries to src/data/portfolio.json.')
           : React.createElement(MotionStagger, { className: 'portfolio-cards', stagger: 0.08 },
             items.map(function(item, i) {
+              var slug = getPortfolioSlug(item);
               return React.createElement(MotionItem, { key: item.id + '-' + i },
                 React.createElement(MotionHover, { as: 'article', className: 'portfolio-card' },
                   React.createElement('div', { className: 'portfolio-card-visual' },
                     item.logoUrl
-                      ? React.createElement('img', { src: item.logoUrl, alt: item.title, className: 'portfolio-card-logo' })
+                      ? React.createElement('img', {
+                        src: item.logoUrl,
+                        alt: item.title,
+                        className: 'portfolio-card-logo'
+                      })
                       : React.createElement('div', { className: 'portfolio-card-placeholder' }, item.title.charAt(0))
                   ),
                   React.createElement('div', { className: 'portfolio-card-body' },
@@ -63,7 +68,7 @@ function PortfolioPage() {
                       )
                       : null,
                     React.createElement(Link, {
-                      to: '/portfolio/' + getPortfolioSlug(item),
+                      to: '/portfolio/' + slug,
                       className: 'portfolio-card-link'
                     },
                       'View case study',

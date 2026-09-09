@@ -140,7 +140,11 @@ function ScrollHomeMoreSections() {
             activeItem && React.createElement('div', { className: 'sh-more__case-body' },
               React.createElement('div', { className: 'sh-more__case-head' },
                 activeItem.logoUrl
-                  ? React.createElement('img', { src: activeItem.logoUrl, alt: '', className: 'sh-more__case-logo' })
+                  ? React.createElement('img', {
+                    src: activeItem.logoUrl,
+                    alt: '',
+                    className: 'sh-more__case-logo'
+                  })
                   : null,
                 React.createElement('div', { className: 'sh-more__case-tags' },
                   (activeItem.tags || []).slice(0, 4).map(function(tag, ti) {

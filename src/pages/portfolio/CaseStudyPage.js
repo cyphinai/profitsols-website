@@ -25,6 +25,15 @@ function stackIconUrl(name) {
   if (n === 'railway') {
     return 'https://cdn.simpleicons.org/railway/ffffff';
   }
+  if (n === 'github') {
+    return 'https://cdn.simpleicons.org/github/ffffff';
+  }
+  if (n === 'nextjs') {
+    return DEVICON + '/nextjs/nextjs-original.svg';
+  }
+  if (n === 'nodejs') {
+    return DEVICON + '/nodejs/nodejs-original.svg';
+  }
   if (STACK_ICON_SUFFIX[n]) {
     return DEVICON + '/' + STACK_ICON_SUFFIX[n];
   }
@@ -148,7 +157,11 @@ function CaseStudyPage() {
           React.createElement('div', { className: 'case-study-hero-head' },
             project.logoUrl
               ? React.createElement('div', { className: 'case-study-logo-wrap' },
-                  React.createElement('img', { src: project.logoUrl, alt: '', className: 'case-study-logo' })
+                  React.createElement('img', {
+                    src: project.logoUrl,
+                    alt: '',
+                    className: 'case-study-logo'
+                  })
                 )
               : null,
             React.createElement('div', { className: 'case-study-hero-copy' },

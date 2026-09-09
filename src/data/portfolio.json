@@ -1,57 +1,68 @@
 [
   {
-    "id": "1",
-    "slug": "assisme",
-    "title": "AssisMe",
-    "summary": "A job board where candidates stand out with video resumes and employers post engaging video job listings.",
-    "description": "AssisMe is a Job Board Application to connect Employer with Employee the need was to create an application where candidates looking for a job can record a \"Video Resume\" To show case their talent and employer who is hiring can also create a \"Video job post\".",
-    "tags": ["Job Board", "Mobile", "Video", "Figma"],
-    "role": "Product design & mobile development",
-    "year": "2024",
-    "duration": "6 months",
-    "stack": ["android", "kotlin", "figma", "firebase"],
-    "logoUrl": "/images/portfolio/assisme-logo.png",
+    "id": "5",
+    "slug": "estatiq",
+    "title": "ESTATIQ",
+    "summary": "A premium prop-tech website for discovering, investing in, and listing property across Pakistan — search, projects, calculators, and AI-assisted discovery.",
+    "description": "ESTATIQ is a ProfitSols portfolio website demonstrating a modern real-estate platform: verified listings, city and project discovery, investment tools, and an AI assistant that understands Pakistani market language (marla, kanal, crore).",
+    "tags": ["Website", "Next.js", "Node.js", "Railway", "PropTech", "Portfolio"],
+    "role": "Full-stack website build",
+    "year": "2026",
+    "duration": "Portfolio build",
+    "stack": ["nextjs", "nodejs", "github", "railway"],
+    "logoUrl": "/images/portfolio/estatiq-logo.svg",
     "screens": [
-      "/images/portfolio/assisme-screen1.png",
-      "/images/portfolio/assisme-screen2.png",
-      "/images/portfolio/assisme-screen3.png"
+      "/images/portfolio/estatiq_website.png"
     ],
-    "linkUrl": "",
-    "challenge": "Traditional CVs rarely capture communication skills and personality. Employers needed a faster way to shortlist while candidates wanted a fairer way to present themselves beyond bullet points.",
-    "solution": "We designed a dual-sided experience: rich video capture with compression and streaming-friendly pipelines, employer dashboards for reviewing applicants, and a calm UI that keeps the focus on people—not forms.",
+    "linkUrl": "https://estatiq.profitsols.com/",
+    "challenge": "Pakistan’s property market is noisy — buyers and overseas investors need verified inventory, transparent filters (city, type, price, beds, size), project context, and decision tools that speak local units and pricing norms.",
+    "solution": "We designed and shipped a Next.js + Node.js platform experience with Buy/Rent/Projects search, featured properties and developments, city hubs, mortgage/yield/investment calculators, and ESTATIQ AI for plain-language listing discovery. Deployed via GitHub to Railway.",
     "results": [
-      "Structured flows for record → preview → publish video profiles",
-      "Role-based dashboards for employers and candidates",
-      "Design system aligned for fast iteration in Figma"
+      "Advanced property search with Buy / Rent / Projects tabs and multi-filter controls",
+      "Featured listings, city markets, and master-planned project showcases",
+      "Investment calculators (mortgage EMI, rental yield, investment score)",
+      "ESTATIQ AI assistant for natural-language property queries",
+      "GitHub → Railway continuous deployment"
     ],
-    "highlights": ["Video resume pipeline", "Video job posts", "Discovery & search"]
+    "highlights": [
+      "Property search & listing discovery",
+      "Featured projects & city markets",
+      "Investment calculators",
+      "ESTATIQ AI assistant",
+      "List Your Property CTA flows"
+    ]
   },
   {
-    "id": "2",
-    "slug": "hotlyme",
-    "title": "Hotlyme",
-    "summary": "Social experience for sharing updates and staying close to friends and family—with a polished, modern feed.",
-    "description": "Hotlyme is a Social Media Application to connect with your friends and family and share your thoughts and ideas with them.",
-    "tags": ["Social", "iOS", "Android", "Product"],
-    "role": "End-to-end product build",
-    "year": "2024",
-    "duration": "5 months",
-    "stack": ["react", "nodejs", "figma", "firebase"],
-    "logoUrl": "/images/portfolio/assisme-logo.png",
+    "id": "4",
+    "slug": "surginex",
+    "title": "SurgiNex",
+    "summary": "A premium B2B website for a global surgical instruments manufacturer — catalogue, RFQ, private label, and export-ready storytelling.",
+    "description": "SurgiNex is a ProfitSols portfolio website showcasing how we build manufacturer and export brands: product categories, featured instruments, manufacturing and quality narratives, private-label OEM flows, catalogues, and RFQ journeys for international buyers.",
+    "tags": ["Website", "Next.js", "Node.js", "Railway", "B2B", "Portfolio"],
+    "role": "Full-stack website build",
+    "year": "2026",
+    "duration": "Portfolio build",
+    "stack": ["nextjs", "nodejs", "github", "railway"],
+    "logoUrl": "/images/portfolio/surginex-logo.svg",
     "screens": [
-      "/images/portfolio/assisme-screen1.png",
-      "/images/portfolio/assisme-screen2.png",
-      "/images/portfolio/assisme-screen3.png"
+      "/images/portfolio/surginex_website.png"
     ],
-    "linkUrl": "",
-    "challenge": "Users expect social apps to feel instant and expressive, while the product team needed a maintainable stack that could grow with new media types and moderation tools.",
-    "solution": "We shipped a composable feed architecture, real-time friendly data patterns, and a bold but readable visual language—tested for long scrolling sessions and accessibility basics.",
+    "linkUrl": "https://surginex.profitsols.com/",
+    "challenge": "Present a dense surgical-instrument catalogue and manufacturer story in a way that feels trustworthy to global distributors, procurement teams, and private-label partners — without burying key actions like quote requests and product discovery.",
+    "solution": "We built a Next.js + Node.js marketing and catalogue experience with clear category navigation, featured instruments with RFQ actions, manufacturing/quality/private-label sections, resource downloads, and insights content. Continuous delivery runs from GitHub to Railway for fast iteration.",
     "results": [
-      "Composable post types and media cards",
-      "Realtime-ready client patterns",
-      "Scalable theming for future brand shifts"
+      "Product category browsing across surgery, orthopedic, dental, ENT, and specialty lines",
+      "Featured instruments with material specs and Add-to-RFQ / Request Quote flows",
+      "Private label & OEM, manufacturing, quality, catalogues, and insights sections for B2B buyers",
+      "GitHub → Railway deployment pipeline for production updates"
     ],
-    "highlights": ["Feed & composer UX", "Notifications", "Profile & social graph"]
+    "highlights": [
+      "Surgical product catalogue & categories",
+      "RFQ / Request a Quote journeys",
+      "Private label & OEM positioning",
+      "Manufacturing & quality storytelling",
+      "Resource catalogues & industry insights"
+    ]
   },
   {
     "id": "3",
@@ -78,5 +89,59 @@
       "Deployment on Railway with PostgreSQL-backed data layer"
     ],
     "highlights": ["React.js website", "Railway hosting", "PostgreSQL database"]
+  },
+  {
+    "id": "2",
+    "slug": "hotlyme",
+    "title": "Hotlyme",
+    "summary": "Social experience for sharing updates and staying close to friends and family—with a polished, modern feed.",
+    "description": "Hotlyme is a Social Media Application to connect with your friends and family and share your thoughts and ideas with them.",
+    "tags": ["Social", "iOS", "Android", "Product"],
+    "role": "End-to-end product build",
+    "year": "2024",
+    "duration": "5 months",
+    "stack": ["react", "nodejs", "figma", "firebase"],
+    "logoUrl": "/images/portfolio/hotlyme-logo.png",
+    "screens": [
+      "/images/portfolio/assisme-screen1.png",
+      "/images/portfolio/assisme-screen2.png",
+      "/images/portfolio/assisme-screen3.png"
+    ],
+    "linkUrl": "",
+    "challenge": "Users expect social apps to feel instant and expressive, while the product team needed a maintainable stack that could grow with new media types and moderation tools.",
+    "solution": "We shipped a composable feed architecture, real-time friendly data patterns, and a bold but readable visual language—tested for long scrolling sessions and accessibility basics.",
+    "results": [
+      "Composable post types and media cards",
+      "Realtime-ready client patterns",
+      "Scalable theming for future brand shifts"
+    ],
+    "highlights": ["Feed & composer UX", "Notifications", "Profile & social graph"]
+  },
+  {
+    "id": "1",
+    "slug": "assisme",
+    "title": "AssisMe",
+    "summary": "A job board where candidates stand out with video resumes and employers post engaging video job listings.",
+    "description": "AssisMe is a Job Board Application to connect Employer with Employee the need was to create an application where candidates looking for a job can record a \"Video Resume\" To show case their talent and employer who is hiring can also create a \"Video job post\".",
+    "tags": ["Job Board", "Mobile", "Video", "Figma"],
+    "role": "Product design & mobile development",
+    "year": "2024",
+    "duration": "6 months",
+    "stack": ["android", "kotlin", "figma", "firebase"],
+    "logoUrl": "/images/portfolio/assisme-logo.png",
+    "screens": [
+      "/images/portfolio/assisme-screen1.png",
+      "/images/portfolio/assisme-screen2.png",
+      "/images/portfolio/assisme-screen3.png"
+    ],
+    "linkUrl": "",
+    "challenge": "Traditional CVs rarely capture communication skills and personality. Employers needed a faster way to shortlist while candidates wanted a fairer way to present themselves beyond bullet points.",
+    "solution": "We designed a dual-sided experience: rich video capture with compression and streaming-friendly pipelines, employer dashboards for reviewing applicants, and a calm UI that keeps the focus on people—not forms.",
+    "results": [
+      "Structured flows for record → preview → publish video profiles",
+      "Role-based dashboards for employers and candidates",
+      "Design system aligned for fast iteration in Figma"
+    ],
+    "highlights": ["Video resume pipeline", "Video job posts", "Discovery & search"]
   }
 ]

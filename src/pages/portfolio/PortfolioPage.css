@@ -154,7 +154,7 @@
 }
 
 .portfolio-card-visual {
-  height: 160px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,9 +163,12 @@
 }
 
 .portfolio-card-logo {
-  max-width: 120px;
-  max-height: 72px;
+  width: 96px;
+  height: 96px;
+  max-width: 96px;
+  max-height: 96px;
   object-fit: contain;
+  display: block;
 }
 
 .portfolio-card-placeholder {
