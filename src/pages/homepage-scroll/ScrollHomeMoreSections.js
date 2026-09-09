@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Additional homepage sections (platforms, about, portfolio, clients, why-us)
+ * Additional homepage sections (platforms, about, portfolio, why-us)
  * Styled to match the scroll homepage dark SaaS theme.
  */
 
@@ -208,16 +208,6 @@ function ScrollHomeMoreSections() {
           });
         })
       ) : null
-    ),
-
-    React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--clients' },
-      React.createElement('p', { className: 'sh-more__eyebrow' }, 'Partners'),
-      React.createElement('h2', { className: 'sh-more__title' }, 'Our clients'),
-      React.createElement(MotionStagger, { className: 'sh-more__clients-grid', stagger: 0.07 },
-        [1, 2, 3, 4, 5].map(function(n) {
-          return React.createElement(MotionItem, { key: n, className: 'sh-more__client-card' }, 'Client ' + n);
-        })
-      )
     ),
 
     React.createElement(MotionReveal, { as: 'section', className: 'sh-more sh-more--why' },

@@ -103,9 +103,9 @@
     "stack": ["react", "nodejs", "figma", "firebase"],
     "logoUrl": "/images/portfolio/hotlyme-logo.png",
     "screens": [
-      "/images/portfolio/assisme-screen1.png",
-      "/images/portfolio/assisme-screen2.png",
-      "/images/portfolio/assisme-screen3.png"
+      "/images/portfolio/hotlyme-screen1.png",
+      "/images/portfolio/hotlyme-screen2.png",
+      "/images/portfolio/hotlyme-screen3.png"
     ],
     "linkUrl": "",
     "challenge": "Users expect social apps to feel instant and expressive, while the product team needed a maintainable stack that could grow with new media types and moderation tools.",
