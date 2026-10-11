@@ -650,6 +650,50 @@
   transform: translateY(-2px);
 }
 
+.svc-contact-form .svc-btn-submit:disabled,
+.contact-form .contact-submit:disabled {
+  opacity: 0.65;
+  cursor: progress;
+  transform: none;
+}
+
+/* ---------- Inquiry form feedback ---------- */
+.inquiry-honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+}
+
+.inquiry-status {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.inquiry-status:empty {
+  display: none;
+}
+
+.inquiry-status--sent,
+.inquiry-status--error {
+  padding: 12px 16px;
+  border-radius: 12px;
+}
+
+.inquiry-status--sent {
+  color: #7ff0c9;
+  background: rgba(40, 200, 140, 0.1);
+  border: 1px solid rgba(40, 200, 140, 0.3);
+}
+
+.inquiry-status--error {
+  color: #ff9db6;
+  background: rgba(238, 44, 101, 0.1);
+  border: 1px solid rgba(238, 44, 101, 0.3);
+}
+
 .svc-contact-footer-note {
   text-align: center;
   margin-top: 18px;

@@ -6,6 +6,7 @@ var CyberFooter = require('../../components/CyberFooter');
 var RevealSection = require('../../components/RevealSection');
 var CyberDecor = require('../../components/CyberDecor');
 var MotionHero = require('../../components/motion').MotionHero;
+var inquiry = require('../../utils/inquiry');
 require('../../styles/cyber-inner-page.css');
 require('./ContactPage.css');
 
@@ -61,6 +62,9 @@ var TRUST_TECH = [
 ];
 
 function ContactPage() {
+  var form = inquiry.useInquiryForm('Contact page');
+  var sending = form.status === 'sending';
+
   return React.createElement('div', { className: 'contact-page cyber-inner-page' },
     React.createElement(SharedHeader, null),
     React.createElement('main', { className: 'cyber-inner-main' },
@@ -87,8 +91,9 @@ function ContactPage() {
           ),
           React.createElement('form', {
             className: 'contact-form',
-            onSubmit: function(e) { e.preventDefault(); }
+            onSubmit: form.handleSubmit
           },
+            React.createElement(inquiry.HoneypotField, null),
             React.createElement('div', { className: 'contact-row' },
               React.createElement('label', { className: 'contact-field' },
                 React.createElement('span', null, 'Name'),
@@ -107,7 +112,10 @@ function ContactPage() {
               React.createElement('span', null, 'Project details'),
               React.createElement('textarea', { name: 'message', rows: 5, required: true, placeholder: 'What are you building? Any deadlines or platforms?' })
             ),
-            React.createElement('button', { type: 'submit', className: 'contact-submit' }, 'Submit inquiry')
+            React.createElement('button', { type: 'submit', className: 'contact-submit', disabled: sending },
+              sending ? 'Sending…' : 'Submit inquiry'
+            ),
+            React.createElement(inquiry.InquiryStatus, { status: form.status })
           ),
           React.createElement('div', { className: 'contact-trust-icons', 'aria-hidden': true },
             TRUST_TECH.map(function(t) {
@@ -126,12 +134,12 @@ function ContactPage() {
             'Direct contact'
           ),
           React.createElement('p', { className: 'contact-info-lead' }, 'Prefer email or phone? Reach us here.'),
-          React.createElement('a', { href: 'mailto:contact.profitsols@gmail.com', className: 'contact-info-card' },
+          React.createElement('a', { href: 'mailto:' + inquiry.INQUIRY_EMAIL, className: 'contact-info-card' },
             React.createElement(IconMail, null),
             React.createElement('span', null,
               React.createElement('strong', null, 'Email'),
               React.createElement('br', null),
-              'contact.profitsols@gmail.com'
+              inquiry.INQUIRY_EMAIL
             )
           ),
           React.createElement('a', { href: 'tel:+923087065507', className: 'contact-info-card' },

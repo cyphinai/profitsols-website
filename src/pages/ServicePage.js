@@ -12,6 +12,7 @@ var MotionHero = require('../components/motion').MotionHero;
 var MotionStagger = require('../components/motion').MotionStagger;
 var MotionItem = require('../components/motion').MotionItem;
 var MotionHover = require('../components/motion').MotionHover;
+var inquiry = require('../utils/inquiry');
 require('../styles/cyber-inner-page.css');
 
 var DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
@@ -68,6 +69,9 @@ function ServicePage(props) {
   var _useState = useState(0);
   var activeService = _useState[0];
   var setActiveService = _useState[1];
+
+  var form = inquiry.useInquiryForm(heroEyebrow + ' service page');
+  var sending = form.status === 'sending';
 
   function renderTechIcon(name, i) {
     var src = techIconSrc(name);
@@ -190,14 +194,18 @@ function ServicePage(props) {
           React.createElement('p', { className: 'svc-contact-hint' },
             'Share a short brief — we’ll follow up with next steps. Or visit our full contact page for more options.'
           ),
-          React.createElement('form', { className: 'svc-contact-form', onSubmit: function(e) { e.preventDefault(); } },
+          React.createElement('form', { className: 'svc-contact-form', onSubmit: form.handleSubmit },
+            React.createElement(inquiry.HoneypotField, null),
             React.createElement('div', { className: 'svc-contact-row' },
-              React.createElement('input', { type: 'text', placeholder: 'Name', required: true, 'aria-label': 'Name' }),
-              React.createElement('input', { type: 'email', placeholder: 'Email', required: true, 'aria-label': 'Email' })
+              React.createElement('input', { type: 'text', name: 'name', placeholder: 'Name', required: true, 'aria-label': 'Name' }),
+              React.createElement('input', { type: 'email', name: 'email', placeholder: 'Email', required: true, 'aria-label': 'Email' })
             ),
-            React.createElement('input', { type: 'tel', placeholder: 'Phone (optional)', 'aria-label': 'Phone' }),
-            React.createElement('textarea', { placeholder: 'Tell us about your project', rows: 4, 'aria-label': 'Message' }),
-            React.createElement('button', { type: 'submit', className: 'svc-btn-submit' }, 'Send message')
+            React.createElement('input', { type: 'tel', name: 'phone', placeholder: 'Phone (optional)', 'aria-label': 'Phone' }),
+            React.createElement('textarea', { name: 'message', placeholder: 'Tell us about your project', rows: 4, required: true, 'aria-label': 'Message' }),
+            React.createElement('button', { type: 'submit', className: 'svc-btn-submit', disabled: sending },
+              sending ? 'Sending…' : 'Send message'
+            ),
+            React.createElement(inquiry.InquiryStatus, { status: form.status })
           ),
           React.createElement('p', { className: 'svc-contact-footer-note' },
             React.createElement(Link, { to: '/contact' }, 'Open full contact page →')
