@@ -56,9 +56,9 @@ function Footer() {
       ),
       React.createElement('div', { className: 'footer-col footer-col-accent-primary' },
         React.createElement('h4', null, 'Contact'),
-        React.createElement('a', { href: 'mailto:contact@profitsols.com', className: 'footer-contact' },
+        React.createElement('a', { href: 'mailto:contact.profitsols@gmail.com', className: 'footer-contact' },
           React.createElement(IconMail, null),
-          'contact@profitsols.com'
+          'contact.profitsols@gmail.com'
         ),
         React.createElement('a', { href: 'tel:+923087065507', className: 'footer-contact' },
           React.createElement(IconPhone, null),

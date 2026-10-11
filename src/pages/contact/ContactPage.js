@@ -126,12 +126,12 @@ function ContactPage() {
             'Direct contact'
           ),
           React.createElement('p', { className: 'contact-info-lead' }, 'Prefer email or phone? Reach us here.'),
-          React.createElement('a', { href: 'mailto:contact@profitsols.com', className: 'contact-info-card' },
+          React.createElement('a', { href: 'mailto:contact.profitsols@gmail.com', className: 'contact-info-card' },
             React.createElement(IconMail, null),
             React.createElement('span', null,
               React.createElement('strong', null, 'Email'),
               React.createElement('br', null),
-              'contact@profitsols.com'
+              'contact.profitsols@gmail.com'
             )
           ),
           React.createElement('a', { href: 'tel:+923087065507', className: 'contact-info-card' },
